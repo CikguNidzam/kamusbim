@@ -630,7 +630,7 @@ const SCRIPT_URL = 'https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbw8C
 
 // Tunjuk URL dalam dashboard
 document.getElementById('showScriptUrl').textContent = 
-  SCRIPT_URL === 'TUKAR_KE_URL_APPS_SCRIPT_ANDA' ? '⚠️ Belum dikonfigurasi' : SCRIPT_URL;
+  SCRIPT_URL === 'https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbw8CB_ZfnkiVbLShCmeHY3cg0HRRjyimjdtswSr4g8u--HzXo1ucs4KAyZMT8YxD5HB/exec' ? '⚠️ Belum dikonfigurasi' : SCRIPT_URL;
 
 // ── Scroll header shadow ──────────────────────────────────
 window.addEventListener('scroll', () => {
