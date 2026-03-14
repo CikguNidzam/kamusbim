@@ -39,11 +39,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   background-size:48px 48px;
   mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
 
-/* VIEWS */
 .view{display:none;position:relative;z-index:1;min-height:100vh}
 .view.active{display:block}
 
-/* ══ HEADER ══════════════════════════════════════════════ */
 .pub-header{
   display:flex;align-items:center;justify-content:space-between;
   padding:1.25rem 2rem;border-bottom:1px solid var(--border);
@@ -68,7 +66,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;flex-shrink:0}
 .btn-admin:hover{color:var(--accent2);border-color:var(--accent2);background:rgba(6,182,212,.06)}
 
-/* ══ HERO ══════════════════════════════════════════════ */
 .hero{text-align:center;padding:5.5rem 1.5rem 3.5rem;position:relative}
 .hero-chip{
   display:inline-flex;align-items:center;gap:.45rem;font-size:.7rem;
@@ -113,7 +110,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .search-clear:hover{color:var(--text);background:var(--border)}
 .search-hint{margin-top:.8rem;font-size:.73rem;color:var(--muted2);letter-spacing:.03em}
 
-/* ══ STATUS & RESULTS ══════════════════════════════════ */
 #statusBar{text-align:center;min-height:2rem;padding:.5rem;font-size:.85rem;color:var(--muted);position:relative;z-index:1}
 
 #results{
@@ -122,7 +118,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 #results.solo{grid-template-columns:minmax(320px,600px);justify-content:center}
 #results.duo{grid-template-columns:repeat(2,1fr);max-width:780px;justify-content:center;margin-left:auto;margin-right:auto}
 
-/* WELCOME STATE */
 .welcome-wrap{grid-column:1/-1;text-align:center;padding:2rem 0 2rem;animation:fadeUp .5s ease both}
 .welcome-tagline{font-size:.82rem;color:var(--muted);margin-bottom:2rem;line-height:1.6}
 .stats-row{display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap}
@@ -136,7 +131,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   background:var(--ag);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .stat-lbl{font-size:.73rem;color:var(--muted);margin-top:.25rem;letter-spacing:.05em}
 
-/* CARDS */
 .card{
   background:var(--card);border:1px solid var(--border);border-radius:20px;
   overflow:hidden;transition:transform .3s cubic-bezier(.34,1.3,.64,1),box-shadow .3s,border-color .3s;
@@ -147,7 +141,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   border-color:var(--accent)}
 @keyframes cardIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-/* YouTube embed — nisbah 16:9 */
 .yt-wrap{position:relative;padding-top:56.25%;background:#000}
 .yt-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block}
 .yt-placeholder{
@@ -174,7 +167,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .card-desc{font-size:.84rem;color:var(--muted);line-height:1.55;margin-top:.2rem}
 .card-date{margin-top:.85rem;font-size:.68rem;color:var(--muted2);display:flex;align-items:center;gap:.35rem}
 
-/* EMPTY STATE */
 .empty{
   grid-column:1/-1;text-align:center;padding:5rem 1rem;
   animation:fadeUp .4s ease}
@@ -182,14 +174,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .empty h3{font-family:'Syne',sans-serif;font-size:1.2rem;margin-bottom:.6rem}
 .empty p{color:var(--muted);font-size:.88rem;line-height:1.6;max-width:320px;margin:0 auto}
 
-/* LOADING */
 .spin{
   display:inline-block;width:14px;height:14px;
   border:2px solid var(--border);border-top-color:var(--accent);
   border-radius:50%;animation:rot .65s linear infinite;vertical-align:middle;margin-right:.4rem}
 @keyframes rot{to{transform:rotate(360deg)}}
 
-/* ══ PIN MODAL ══════════════════════════════════════════ */
 .overlay{
   display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);
   backdrop-filter:blur(16px);z-index:200;
@@ -225,10 +215,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   font-size:.82rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:color .2s}
 .btn-cancel:hover{color:var(--text)}
 
-/* ══ ADMIN PANEL ══════════════════════════════════════ */
 .admin-layout{display:flex;min-height:100vh}
 
-/* Sidebar */
 .sidebar{
   width:240px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);
   display:flex;flex-direction:column;position:sticky;top:0;height:100vh;
@@ -252,14 +240,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s}
 .sb-back:hover{background:rgba(255,255,255,.04);color:var(--text)}
 
-/* Admin Main */
 .admin-main{flex:1;padding:2.25rem;overflow-y:auto;min-width:0}
 .tab-content{display:none}.tab-content.on{display:block}
 .pg-head{margin-bottom:2rem}
 .pg-head h1{font-family:'Syne',sans-serif;font-size:1.85rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.35rem}
 .pg-head p{color:var(--muted);font-size:.86rem}
 
-/* Dashboard */
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:1rem;margin-bottom:2rem}
 .dash-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.5rem;transition:border-color .2s}
 .dash-card:hover{border-color:var(--accent)}
@@ -268,7 +254,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   background:var(--ag);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .dash-lbl{font-size:.73rem;color:var(--muted);margin-top:.25rem}
 
-/* Info box */
 .info-box{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.6rem;max-width:700px;margin-bottom:1.75rem}
 .info-box h3{font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
 .info-box ol{margin-left:1.25rem;color:var(--muted);font-size:.85rem;line-height:2}
@@ -276,7 +261,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .info-box a{color:var(--accent2);text-decoration:none}
 .info-box a:hover{text-decoration:underline}
 
-/* Form tambah */
 .form-box{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:2.25rem;max-width:700px}
 .fg{margin-bottom:1.35rem}
 .fg label{display:block;font-size:.72rem;font-weight:500;color:var(--muted);margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.08em}
@@ -288,7 +272,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .fg input:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
 .fg .hint{font-size:.73rem;color:var(--muted2);margin-top:.45rem}
 
-/* YouTube preview */
 .yt-preview-wrap{
   display:none;margin-top:.85rem;border-radius:13px;overflow:hidden;
   border:1px solid var(--border);background:#000;
@@ -296,7 +279,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .yt-preview-wrap.show{display:block}
 .yt-preview-wrap iframe{width:100%;height:210px;border:none;display:block}
 
-/* Buttons */
 .btn-pri{
   padding:.95rem 2.25rem;background:var(--ag);border:none;border-radius:13px;
   color:#fff;font-size:.93rem;font-weight:600;font-family:'DM Sans',sans-serif;
@@ -316,7 +298,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   cursor:pointer;transition:all .2s;margin-right:.35rem}
 .btn-edit:hover{background:rgba(37,99,235,.22)}
 
-/* Table */
 .tbl-box{background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden}
 .tbl-top{
   padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);
@@ -349,7 +330,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
   background:rgba(37,99,235,.12);color:var(--accent);border:1px solid rgba(37,99,235,.2)}
 .empty-tbl{text-align:center;padding:3.5rem;color:var(--muted);font-size:.85rem}
 
-/* Edit inline */
 .edit-row td{background:rgba(37,99,235,.05);padding:1rem 1.2rem}
 .edit-inp{
   width:100%;padding:.55rem .8rem;background:var(--surface);
@@ -365,7 +345,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
   padding:.4rem .85rem;background:none;border:1px solid var(--border);
   border-radius:8px;color:var(--muted);font-size:.78rem;font-family:'DM Sans',sans-serif;cursor:pointer}
 
-/* Toast */
 .toast{
   position:fixed;bottom:2rem;right:2rem;padding:.9rem 1.4rem;border-radius:14px;
   font-size:.85rem;font-weight:500;z-index:9999;
@@ -377,14 +356,12 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
 .toast.err{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:var(--danger)}
 .toast.info{background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);color:#93c5fd}
 
-/* Footer */
 .pub-footer{
   position:relative;z-index:1;text-align:center;padding:2rem;
   color:var(--muted2);font-size:.73rem;border-top:1px solid var(--border)}
 .pub-footer a{color:var(--muted);text-decoration:none;transition:color .2s}
 .pub-footer a:hover{color:var(--accent2)}
 
-/* ══ RESPONSIVE MOBILE ══════════════════════════════════ */
 .mob-tabbar{
   display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
   background:rgba(12,18,32,.95);border-top:1px solid var(--border);
@@ -418,7 +395,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
 <div class="bg-mesh"></div>
 <div class="bg-grid"></div>
 
-<!-- ══ HALAMAN UMUM ══════════════════════════════════════ -->
 <div id="view-public" class="view active">
   <header class="pub-header" id="mainHeader">
     <a class="logo" href="#" onclick="resetWelcome();return false">
@@ -465,7 +441,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
   </footer>
 </div>
 
-<!-- ══ PIN MODAL ════════════════════════════════════════ -->
 <div class="overlay" id="pinOverlay">
   <div class="modal">
     <span class="modal-ico">🔐</span>
@@ -478,9 +453,7 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
   </div>
 </div>
 
-<!-- ══ HALAMAN ADMIN ════════════════════════════════════ -->
 <div id="view-admin" class="view">
-  <!-- Mobile bottom tab bar -->
   <div class="mob-tabbar">
     <button class="mob-tab on" id="mobt-dashboard" onclick="tukTab('dashboard',this)">
       <span class="mob-tab-ico">📊</span>
@@ -501,7 +474,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
   </div>
 
   <div class="admin-layout">
-    <!-- Sidebar Desktop -->
     <aside class="sidebar">
       <div class="sb-logo">
         <div class="logo-badge" style="width:36px;height:36px;font-size:1rem;flex-shrink:0">🤟</div>
@@ -520,8 +492,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
     </aside>
 
     <main class="admin-main">
-
-      <!-- TAB: DASHBOARD -->
       <div class="tab-content on" id="tab-dashboard">
         <div class="pg-head">
           <h1>Dashboard</h1>
@@ -540,8 +510,8 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
         <div class="info-box">
           <h3>📋 Cara Tambah Video Isyarat</h3>
           <ol>
-            <li>Upload video ke <strong>YouTube</strong> sebagai <strong>Unlisted</strong> (Tidak Tersenarai)</li>
-            <li>Salin <strong>YouTube URL</strong> atau <strong>Video ID</strong> — contoh: <code>dQw4w9WgXcQ</code></li>
+            <li>Upload video ke <strong>YouTube</strong> sebagai <strong>Unlisted</strong></li>
+            <li>Salin <strong>YouTube URL</strong> atau <strong>Video ID</strong></li>
             <li>Pergi ke tab <strong>Tambah Entri</strong> → isi perkataan + tampal URL/ID</li>
             <li>Klik <strong>Simpan ke Kamus</strong> — selesai! 🎉</li>
           </ol>
@@ -550,13 +520,11 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
           <h3>🔗 Sambungan Google Sheets</h3>
           <p style="color:var(--muted);font-size:.84rem;line-height:1.7">
             Web ini disambungkan ke <strong>Google Sheets</strong> melalui Google Apps Script.<br>
-            Semua data disimpan selamat dalam spreadsheet anda.<br>
             URL Apps Script: <code id="showScriptUrl" style="word-break:break-all">—</code>
           </p>
         </div>
       </div>
 
-      <!-- TAB: TAMBAH ENTRI -->
       <div class="tab-content" id="tab-tambah">
         <div class="pg-head">
           <h1>Tambah Entri</h1>
@@ -569,7 +537,7 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
           </div>
           <div class="fg">
             <label>Keterangan (pilihan)</label>
-            <textarea id="inKeterangan" rows="2" placeholder="Huraian ringkas tentang isyarat ini…"></textarea>
+            <textarea id="inKeterangan" rows="2" placeholder="Huraian ringkas…"></textarea>
           </div>
           <div class="fg">
             <label>YouTube URL atau Video ID *</label>
@@ -584,7 +552,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
         </div>
       </div>
 
-      <!-- TAB: SENARAI -->
       <div class="tab-content" id="tab-senarai">
         <div class="pg-head">
           <h1>Senarai Kamus</h1>
@@ -613,7 +580,6 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
           </div>
         </div>
       </div>
-
     </main>
   </div>
 </div>
@@ -622,22 +588,19 @@ td{padding:.9rem 1.2rem;vertical-align:middle}
 
 <script>
 // ══════════════════════════════════════════════════════════
-//  KONFIGURASI — TUKAR URL INI KEPADA URL APPS SCRIPT ANDA
+//  ⚠️  TUKAR URL INI KEPADA URL APPS SCRIPT BARU ANDA
+//  (Guna akaun Gmail biasa, bukan akaun MOE)
 // ══════════════════════════════════════════════════════════
-const SCRIPT_URL = 'https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbw8CB_ZfnkiVbLShCmeHY3cg0HRRjyimjdtswSr4g8u--HzXo1ucs4KAyZMT8YxD5HB/exec';
-// Contoh: 'https://script.google.com/macros/s/AKfycb.../exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzC_EZMIY8XVspJIA-RIsypLzCUAngbSPX4eJMG1nG4rv100KTqtHNz_5GmUbHtWDFtNA/exec';
 // ══════════════════════════════════════════════════════════
 
-// Tunjuk URL dalam dashboard
-document.getElementById('showScriptUrl').textContent = 
-  SCRIPT_URL === 'TUKAR_KE_URL_APPS_SCRIPT_ANDA' ? '⚠️ Belum dikonfigurasi' : SCRIPT_URL;
+document.getElementById('showScriptUrl').textContent =
+  SCRIPT_URL.includes('TAMPAL') ? '⚠️ Belum dikonfigurasi' : SCRIPT_URL;
 
-// ── Scroll header shadow ──────────────────────────────────
 window.addEventListener('scroll', () => {
   document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-// ── EKSTRAK YOUTUBE ID ────────────────────────────────────
 function ekstrakYoutubeId(input) {
   if (!input) return null;
   input = input.trim().replace(/[\u200B-\u200D\uFEFF\u00A0]/g, '').replace(/\s+/g,' ');
@@ -655,15 +618,10 @@ function ekstrakYoutubeId(input) {
   return last ? last[1] : null;
 }
 
-// ── API ── (panggil Apps Script) ──────────────────────────
 async function callAPI(action, params = {}) {
-  if (SCRIPT_URL === 'TUKAR_KE_URL_APPS_SCRIPT_ANDA') {
-    throw new Error('URL Apps Script belum dikonfigurasi dalam fail config.js');
-  }
   const url = new URL(SCRIPT_URL);
   url.searchParams.set('action', action);
   Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
-
   const res = await fetch(url.toString(), { redirect: 'follow' });
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const text = await res.text();
@@ -671,7 +629,6 @@ async function callAPI(action, params = {}) {
   catch { throw new Error('Respons tidak sah dari server'); }
 }
 
-// Fungsi API ringkas
 const API = {
   async semuaPerkataan()                              { return callAPI('semuaPerkataan'); },
   async cariPerkataan(q)                              { return callAPI('cariPerkataan', { q }); },
@@ -683,7 +640,6 @@ const API = {
   }
 };
 
-// ── STATS UTAMA ───────────────────────────────────────────
 let pubStatsLoaded = false;
 async function muatStats() {
   if (pubStatsLoaded) return;
@@ -699,7 +655,6 @@ async function muatStats() {
 }
 muatStats();
 
-// ── SEARCH ───────────────────────────────────────────────
 let dbt;
 const inp = document.getElementById('searchInput');
 const clrBtn = document.getElementById('searchClear');
@@ -751,12 +706,10 @@ function paparHasil(r, q) {
     </div>`;
     return;
   }
-  div.className = 'results-grid';
-  if (r.data.length === 1) div.id = 'results', div.className = '', div.classList.add('solo');
-  else if (r.data.length === 2) div.id = 'results', div.className = '', div.classList.add('duo');
-  else { div.id = 'results'; div.className = ''; }
-  // Re-assign id after class manipulation
   div.id = 'results';
+  div.className = '';
+  if (r.data.length === 1) div.classList.add('solo');
+  else if (r.data.length === 2) div.classList.add('duo');
 
   div.innerHTML = r.data.map((item, i) => `
     <div class="card" style="animation-delay:${i * .08}s">
@@ -794,7 +747,6 @@ function resetWelcome() {
 }
 function setStatus(h) { document.getElementById('statusBar').innerHTML = h; }
 
-// ── PIN MODAL ─────────────────────────────────────────────
 function bukaPin() {
   document.getElementById('pinOverlay').classList.add('open');
   document.getElementById('pinInput').value = '';
@@ -831,7 +783,6 @@ document.getElementById('pinOverlay').addEventListener('click', e => {
   if (e.target === document.getElementById('pinOverlay')) tutupPin();
 });
 
-// ── VIEW SWITCH ───────────────────────────────────────────
 function bukaPanelAdmin() {
   document.getElementById('view-public').classList.remove('active');
   document.getElementById('view-admin').classList.add('active');
@@ -842,19 +793,16 @@ function balikUmum() {
   document.getElementById('view-public').classList.add('active');
 }
 
-// ── ADMIN: TAB ────────────────────────────────────────────
 function tukTab(nama, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('on'));
   document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('on'));
   document.querySelectorAll('.mob-tab').forEach(b => b.classList.remove('on'));
   document.getElementById('tab-' + nama).classList.add('on');
   if (btn) btn.classList.add('on');
-  // Sync sidebar
   const sbBtn = document.getElementById('sbt-' + nama);
   if (sbBtn) sbBtn.classList.add('on');
 }
 
-// ── ADMIN: DASHBOARD ──────────────────────────────────────
 async function muatDashboard() {
   try {
     const r = await API.semuaPerkataan();
@@ -862,10 +810,9 @@ async function muatDashboard() {
     document.getElementById('admTotal').textContent = r.data.length;
     document.getElementById('admTerbaru').textContent =
       r.data.length > 0 ? r.data[r.data.length - 1].perkataan : '—';
-  } catch(e) { /* silent */ }
+  } catch(e) { }
 }
 
-// ── ADMIN: YOUTUBE PREVIEW ────────────────────────────────
 function previewYoutube(val) {
   const id = ekstrakYoutubeId(val);
   const wrap = document.getElementById('ytPreview');
@@ -879,19 +826,15 @@ function previewYoutube(val) {
   }
 }
 
-// ── ADMIN: TAMBAH ENTRI ───────────────────────────────────
 async function mulaiTambah() {
   const perkataan    = document.getElementById('inPerkataan').value.trim();
   const keterangan   = document.getElementById('inKeterangan').value.trim();
   const youtubeInput = document.getElementById('inYoutube').value.trim();
-
   if (!perkataan)    { showToast('⚠️ Sila masukkan perkataan.', 'err'); return; }
   if (!youtubeInput) { showToast('⚠️ Sila masukkan YouTube URL atau ID.', 'err'); return; }
-  if (!ekstrakYoutubeId(youtubeInput)) { showToast('❌ YouTube ID tidak sah. Cuba semak URL.', 'err'); return; }
-
+  if (!ekstrakYoutubeId(youtubeInput)) { showToast('❌ YouTube ID tidak sah.', 'err'); return; }
   const btn = document.getElementById('btnTambah');
   btn.disabled = true; btn.textContent = '⏳ Menyimpan…';
-
   try {
     const r = await API.tambahEntri(perkataan, keterangan, youtubeInput);
     btn.disabled = false; btn.textContent = '➕ Simpan ke Kamus';
@@ -912,7 +855,6 @@ async function mulaiTambah() {
   }
 }
 
-// ── ADMIN: SENARAI ────────────────────────────────────────
 let senaraiData = [];
 async function muatSenarai() {
   document.getElementById('senaraiBody').innerHTML =
@@ -977,9 +919,7 @@ async function padamItem(row, perkataan) {
 function editItem(row) {
   const item = senaraiData.find(i => i.row === row);
   if (!item) return;
-  // Remove existing edit rows
   document.querySelectorAll('.edit-row').forEach(r => r.remove());
-
   const tr = document.getElementById('tr-' + row);
   const editTr = document.createElement('tr');
   editTr.className = 'edit-row';
@@ -1017,7 +957,6 @@ async function simpanEdit(row) {
   const keterangan = document.getElementById('edit-keterangan-' + row).value.trim();
   const youtube    = document.getElementById('edit-youtube-' + row).value.trim();
   if (!perkataan || !youtube) { showToast('⚠️ Perkataan dan YouTube tidak boleh kosong.', 'err'); return; }
-
   try {
     const r = await API.kemaskiniEntri(row, perkataan, keterangan, youtube);
     if (r && r.ok) {
@@ -1029,7 +968,6 @@ async function simpanEdit(row) {
   } catch(e) { showToast('❌ ' + e.message, 'err'); }
 }
 
-// ── TOAST ─────────────────────────────────────────────────
 let tTmr;
 function showToast(msg, type) {
   const t = document.getElementById('toast');
