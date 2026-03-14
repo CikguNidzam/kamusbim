@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamus Bahasa Isyarat Malaysia — Cikgu Nidzam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #06090f;
+  --surface: #0c1220;
+  --card:    #101826;
+  --border:  #1a2840;
+  --accent:  #2563eb;
+  --accent2: #06b6d4;
+  --ag:      linear-gradient(135deg,#2563eb,#06b6d4);
+  --glow:    rgba(37,99,235,0.18);
+  --text:    #dde4f0;
+  --muted:   #4d6180;
+  --muted2:  #2a3d58;
+  --danger:  #ef4444;
+  --success: #10b981;
+  --warn:    #f59e0b;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+.bg-mesh{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 0%,rgba(37,99,235,.08) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 50% at 85% 100%,rgba(6,182,212,.07) 0%,transparent 50%),
+    radial-gradient(ellipse 40% 40% at 50% 50%,rgba(37,99,235,.03) 0%,transparent 60%)}
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(37,99,235,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(37,99,235,.04) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+
+/* VIEWS */
+.view{display:none;position:relative;z-index:1;min-height:100vh}
+.view.active{display:block}
+
+/* ══ HEADER ══════════════════════════════════════════════ */
+.pub-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 2rem;border-bottom:1px solid var(--border);
+  background:rgba(6,9,15,.85);backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:50;
+  transition:box-shadow .3s}
+.pub-header.scrolled{box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.logo{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+.logo-badge{
+  width:42px;height:42px;border-radius:14px;background:var(--ag);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+  box-shadow:0 0 28px rgba(37,99,235,.5);flex-shrink:0;
+  transition:transform .2s,box-shadow .2s}
+.logo:hover .logo-badge{transform:scale(1.08);box-shadow:0 0 36px rgba(37,99,235,.7)}
+.logo-name{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;
+  letter-spacing:-.02em;line-height:1.1;color:var(--text)}
+.logo-sub{display:block;font-size:.58rem;font-weight:400;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;font-family:'DM Sans',sans-serif;margin-top:.1rem}
+.btn-admin{
+  font-size:.75rem;color:var(--muted);padding:.45rem 1.2rem;
+  border:1px solid var(--border);border-radius:999px;background:none;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;flex-shrink:0}
+.btn-admin:hover{color:var(--accent2);border-color:var(--accent2);background:rgba(6,182,212,.06)}
+
+/* ══ HERO ══════════════════════════════════════════════ */
+.hero{text-align:center;padding:5.5rem 1.5rem 3.5rem;position:relative}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:.45rem;font-size:.7rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent2);background:rgba(6,182,212,.08);
+  border:1px solid rgba(6,182,212,.2);
+  padding:.4rem 1.1rem;border-radius:999px;margin-bottom:2rem;
+  animation:fadeDown .6s ease both}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  font-weight:800;letter-spacing:-.05em;line-height:.9;
+  margin-bottom:1.35rem;
+  background:linear-gradient(160deg,#fff 25%,#93c5fd 65%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp .7s ease .1s both}
+.hero p{
+  color:var(--muted);font-size:1.05rem;max-width:420px;margin:0 auto 2.75rem;
+  line-height:1.7;animation:fadeUp .7s ease .2s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.search-wrap{position:relative;max-width:580px;margin:0 auto;animation:fadeUp .7s ease .3s both}
+.search-ico{
+  position:absolute;left:1.3rem;top:50%;transform:translateY(-50%);
+  color:var(--muted);pointer-events:none;font-size:1rem;transition:color .2s}
+.search-wrap:focus-within .search-ico{color:var(--accent)}
+#searchInput{
+  width:100%;padding:1.15rem 4.5rem 1.15rem 3.2rem;background:var(--surface);
+  border:1.5px solid var(--border);border-radius:18px;color:var(--text);
+  font-size:1rem;font-family:'DM Sans',sans-serif;outline:none;
+  transition:border-color .25s,box-shadow .25s,background .25s}
+#searchInput::placeholder{color:var(--muted)}
+#searchInput:focus{
+  border-color:var(--accent);box-shadow:0 0 0 4px var(--glow);
+  background:rgba(12,18,32,.9)}
+.search-clear{
+  position:absolute;right:1.2rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:1rem;padding:.25rem;border-radius:50%;transition:color .2s,background .2s;
+  display:none}
+.search-clear:hover{color:var(--text);background:var(--border)}
+.search-hint{margin-top:.8rem;font-size:.73rem;color:var(--muted2);letter-spacing:.03em}
+
+/* ══ STATUS & RESULTS ══════════════════════════════════ */
+#statusBar{text-align:center;min-height:2rem;padding:.5rem;font-size:.85rem;color:var(--muted);position:relative;z-index:1}
+
+#results{
+  max-width:1120px;margin:0 auto;padding:0 1.5rem 6rem;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
+#results.solo{grid-template-columns:minmax(320px,600px);justify-content:center}
+#results.duo{grid-template-columns:repeat(2,1fr);max-width:780px;justify-content:center;margin-left:auto;margin-right:auto}
+
+/* WELCOME STATE */
+.welcome-wrap{grid-column:1/-1;text-align:center;padding:2rem 0 2rem;animation:fadeUp .5s ease both}
+.welcome-tagline{font-size:.82rem;color:var(--muted);margin-bottom:2rem;line-height:1.6}
+.stats-row{display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap}
+.stat-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:18px;padding:1.5rem 2.75rem;text-align:center;
+  transition:border-color .2s,transform .2s}
+.stat-box:hover{border-color:var(--accent);transform:translateY(-3px)}
+.stat-num{
+  font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;
+  background:var(--ag);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-size:.73rem;color:var(--muted);margin-top:.25rem;letter-spacing:.05em}
+
+/* CARDS */
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  overflow:hidden;transition:transform .3s cubic-bezier(.34,1.3,.64,1),box-shadow .3s,border-color .3s;
+  animation:cardIn .45s ease both}
+.card:hover{
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:0 28px 56px rgba(0,0,0,.6),0 0 0 1px var(--accent);
+  border-color:var(--accent)}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* YouTube embed — nisbah 16:9 */
+.yt-wrap{position:relative;padding-top:56.25%;background:#000}
+.yt-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block}
+.yt-placeholder{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#0a1020 0%,#0f1e3a 50%,#071525 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;
+  color:var(--muted);font-size:.8rem;cursor:pointer;
+  transition:background .3s}
+.yt-placeholder:hover{background:linear-gradient(135deg,#0f1830 0%,#162847 50%,#0c2035 100%)}
+.yt-play{
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(220,0,0,.85);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  transition:transform .25s cubic-bezier(.34,1.5,.64,1),background .2s;
+  box-shadow:0 8px 24px rgba(220,0,0,.35)}
+.yt-placeholder:hover .yt-play{transform:scale(1.12);background:rgba(255,0,0,1)}
+
+.card-body{padding:1.35rem}
+.card-word{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;
+  letter-spacing:-.025em;margin-bottom:.35rem;line-height:1.1;
+  background:linear-gradient(90deg,#fff 40%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.card-desc{font-size:.84rem;color:var(--muted);line-height:1.55;margin-top:.2rem}
+.card-date{margin-top:.85rem;font-size:.68rem;color:var(--muted2);display:flex;align-items:center;gap:.35rem}
+
+/* EMPTY STATE */
+.empty{
+  grid-column:1/-1;text-align:center;padding:5rem 1rem;
+  animation:fadeUp .4s ease}
+.empty-ico{font-size:4rem;margin-bottom:1.25rem;display:block}
+.empty h3{font-family:'Syne',sans-serif;font-size:1.2rem;margin-bottom:.6rem}
+.empty p{color:var(--muted);font-size:.88rem;line-height:1.6;max-width:320px;margin:0 auto}
+
+/* LOADING */
+.spin{
+  display:inline-block;width:14px;height:14px;
+  border:2px solid var(--border);border-top-color:var(--accent);
+  border-radius:50%;animation:rot .65s linear infinite;vertical-align:middle;margin-right:.4rem}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* ══ PIN MODAL ══════════════════════════════════════════ */
+.overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);
+  backdrop-filter:blur(16px);z-index:200;
+  align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{
+  background:var(--card);border:1px solid var(--border);border-radius:28px;
+  padding:2.75rem 2.5rem;width:90%;max-width:380px;text-align:center;
+  animation:popIn .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 40px 80px rgba(0,0,0,.7)}
+@keyframes popIn{from{opacity:0;transform:scale(.8) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-ico{font-size:3rem;margin-bottom:1.1rem;display:block}
+.modal h2{font-family:'Syne',sans-serif;font-size:1.35rem;margin-bottom:.4rem}
+.modal p{font-size:.84rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.55}
+#pinInput{
+  width:100%;padding:.9rem;background:var(--surface);
+  border:1.5px solid var(--border);border-radius:14px;color:var(--text);
+  font-size:2rem;text-align:center;letter-spacing:.5em;
+  font-family:'Syne',sans-serif;outline:none;margin-bottom:.65rem;
+  transition:border-color .2s,box-shadow .2s}
+#pinInput:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
+#pinInput.wrong{animation:shake .4s ease;border-color:var(--danger)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.pin-err{font-size:.78rem;color:var(--danger);min-height:1.4em;margin-bottom:.65rem}
+.btn-ok{
+  width:100%;padding:.95rem;background:var(--ag);border:none;border-radius:14px;
+  color:#fff;font-size:.95rem;font-weight:600;font-family:'DM Sans',sans-serif;
+  cursor:pointer;transition:opacity .2s,transform .15s;box-shadow:0 8px 24px rgba(37,99,235,.4)}
+.btn-ok:hover{opacity:.9;transform:translateY(-1px)}
+.btn-ok:active{transform:translateY(0)}
+.btn-cancel{
+  margin-top:.85rem;background:none;border:none;color:var(--muted);
+  font-size:.82rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:color .2s}
+.btn-cancel:hover{color:var(--text)}
+
+/* ══ ADMIN PANEL ══════════════════════════════════════ */
+.admin-layout{display:flex;min-height:100vh}
+
+/* Sidebar */
+.sidebar{
+  width:240px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;
+  padding:1.5rem .85rem;overflow-y:auto}
+.sb-logo{
+  display:flex;align-items:center;gap:.7rem;padding:.5rem .6rem 1.5rem;
+  border-bottom:1px solid var(--border);margin-bottom:1.35rem}
+.sb-logo-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:-.02em;line-height:1.2}
+.sb-logo-sub{display:block;font-size:.58rem;font-weight:400;color:var(--warn);letter-spacing:.1em;text-transform:uppercase;margin-top:.15rem}
+.sb-lbl{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);padding:.25rem .7rem;margin-bottom:.4rem}
+.sb-item{
+  display:flex;align-items:center;gap:.7rem;padding:.65rem .85rem;border-radius:10px;
+  font-size:.85rem;color:var(--muted);background:none;border:none;width:100%;text-align:left;
+  font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .18s;margin-bottom:.15rem}
+.sb-item:hover{background:rgba(255,255,255,.04);color:var(--text)}
+.sb-item.on{background:rgba(37,99,235,.15);color:var(--accent)}
+.sb-footer{margin-top:auto;padding-top:1.25rem;border-top:1px solid var(--border)}
+.sb-back{
+  display:flex;align-items:center;gap:.5rem;width:100%;background:none;border:none;
+  color:var(--muted);font-size:.8rem;padding:.55rem .85rem;border-radius:10px;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s}
+.sb-back:hover{background:rgba(255,255,255,.04);color:var(--text)}
+
+/* Admin Main */
+.admin-main{flex:1;padding:2.25rem;overflow-y:auto;min-width:0}
+.tab-content{display:none}.tab-content.on{display:block}
+.pg-head{margin-bottom:2rem}
+.pg-head h1{font-family:'Syne',sans-serif;font-size:1.85rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.35rem}
+.pg-head p{color:var(--muted);font-size:.86rem}
+
+/* Dashboard */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:1rem;margin-bottom:2rem}
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.5rem;transition:border-color .2s}
+.dash-card:hover{border-color:var(--accent)}
+.dash-num{
+  font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;
+  background:var(--ag);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dash-lbl{font-size:.73rem;color:var(--muted);margin-top:.25rem}
+
+/* Info box */
+.info-box{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.6rem;max-width:700px;margin-bottom:1.75rem}
+.info-box h3{font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+.info-box ol{margin-left:1.25rem;color:var(--muted);font-size:.85rem;line-height:2}
+.info-box code{background:var(--surface);padding:.15rem .45rem;border-radius:6px;font-size:.8rem;color:var(--accent2);font-family:monospace}
+.info-box a{color:var(--accent2);text-decoration:none}
+.info-box a:hover{text-decoration:underline}
+
+/* Form tambah */
+.form-box{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:2.25rem;max-width:700px}
+.fg{margin-bottom:1.35rem}
+.fg label{display:block;font-size:.72rem;font-weight:500;color:var(--muted);margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.08em}
+.fg input[type=text],.fg textarea{
+  width:100%;padding:.9rem 1.1rem;background:var(--surface);
+  border:1.5px solid var(--border);border-radius:13px;color:var(--text);
+  font-size:.93rem;font-family:'DM Sans',sans-serif;outline:none;resize:vertical;
+  transition:border-color .2s,box-shadow .2s}
+.fg input:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
+.fg .hint{font-size:.73rem;color:var(--muted2);margin-top:.45rem}
+
+/* YouTube preview */
+.yt-preview-wrap{
+  display:none;margin-top:.85rem;border-radius:13px;overflow:hidden;
+  border:1px solid var(--border);background:#000;
+  box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.yt-preview-wrap.show{display:block}
+.yt-preview-wrap iframe{width:100%;height:210px;border:none;display:block}
+
+/* Buttons */
+.btn-pri{
+  padding:.95rem 2.25rem;background:var(--ag);border:none;border-radius:13px;
+  color:#fff;font-size:.93rem;font-weight:600;font-family:'DM Sans',sans-serif;
+  cursor:pointer;transition:opacity .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 8px 20px rgba(37,99,235,.4)}
+.btn-pri:hover{opacity:.92;transform:translateY(-1px);box-shadow:0 12px 28px rgba(37,99,235,.5)}
+.btn-pri:active{transform:scale(.98)}
+.btn-pri:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-del{
+  padding:.4rem .9rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);
+  border-radius:8px;color:var(--danger);font-size:.78rem;font-family:'DM Sans',sans-serif;
+  cursor:pointer;transition:all .2s}
+.btn-del:hover{background:rgba(239,68,68,.22);border-color:rgba(239,68,68,.4)}
+.btn-edit{
+  padding:.4rem .9rem;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);
+  border-radius:8px;color:var(--accent);font-size:.78rem;font-family:'DM Sans',sans-serif;
+  cursor:pointer;transition:all .2s;margin-right:.35rem}
+.btn-edit:hover{background:rgba(37,99,235,.22)}
+
+/* Table */
+.tbl-box{background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden}
+.tbl-top{
+  padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.tbl-top h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
+.tbl-count{font-size:.75rem;color:var(--muted);margin-left:.5rem}
+#adminSearch{
+  padding:.5rem 1.1rem;background:var(--surface);border:1px solid var(--border);
+  border-radius:999px;color:var(--text);font-size:.82rem;font-family:'DM Sans',sans-serif;
+  outline:none;width:220px;transition:border-color .2s,box-shadow .2s}
+#adminSearch:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.tbl-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:560px}
+thead th{
+  padding:.75rem 1.2rem;text-align:left;font-size:.67rem;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--muted);background:rgba(255,255,255,.02);
+  border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid rgba(26,40,64,.6);transition:background .15s}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+tbody tr:last-child{border-bottom:none}
+td{padding:.9rem 1.2rem;vertical-align:middle}
+.td-word{font-family:'Syne',sans-serif;font-weight:700;font-size:.93rem}
+.yt-thumb{width:96px;height:60px;border-radius:8px;object-fit:cover;display:block}
+.yt-thumb-ph{
+  width:96px;height:60px;border-radius:8px;
+  background:linear-gradient(135deg,#0f172a,#1e3a5f);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--muted)}
+.badge{
+  display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.67rem;
+  background:rgba(37,99,235,.12);color:var(--accent);border:1px solid rgba(37,99,235,.2)}
+.empty-tbl{text-align:center;padding:3.5rem;color:var(--muted);font-size:.85rem}
+
+/* Edit inline */
+.edit-row td{background:rgba(37,99,235,.05);padding:1rem 1.2rem}
+.edit-inp{
+  width:100%;padding:.55rem .8rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;color:var(--text);
+  font-size:.85rem;font-family:'DM Sans',sans-serif;outline:none}
+.edit-inp:focus{border-color:var(--accent)}
+.edit-actions{display:flex;gap:.5rem;margin-top:.5rem}
+.btn-save{
+  padding:.4rem .85rem;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);
+  border-radius:8px;color:var(--success);font-size:.78rem;font-family:'DM Sans',sans-serif;cursor:pointer}
+.btn-save:hover{background:rgba(16,185,129,.22)}
+.btn-xcancel{
+  padding:.4rem .85rem;background:none;border:1px solid var(--border);
+  border-radius:8px;color:var(--muted);font-size:.78rem;font-family:'DM Sans',sans-serif;cursor:pointer}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;padding:.9rem 1.4rem;border-radius:14px;
+  font-size:.85rem;font-weight:500;z-index:9999;
+  display:flex;align-items:center;gap:.65rem;max-width:360px;
+  transform:translateY(120px);opacity:0;
+  transition:all .4s cubic-bezier(.34,1.56,.64,1)}
+.toast.up{transform:translateY(0);opacity:1}
+.toast.ok{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:var(--success)}
+.toast.err{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:var(--danger)}
+.toast.info{background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);color:#93c5fd}
+
+/* Footer */
+.pub-footer{
+  position:relative;z-index:1;text-align:center;padding:2rem;
+  color:var(--muted2);font-size:.73rem;border-top:1px solid var(--border)}
+.pub-footer a{color:var(--muted);text-decoration:none;transition:color .2s}
+.pub-footer a:hover{color:var(--accent2)}
+
+/* ══ RESPONSIVE MOBILE ══════════════════════════════════ */
+.mob-tabbar{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:rgba(12,18,32,.95);border-top:1px solid var(--border);
+  padding:.5rem .5rem calc(.5rem + env(safe-area-inset-bottom));
+  gap:.25rem;backdrop-filter:blur(20px)}
+.mob-tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:.2rem;padding:.5rem .25rem;border-radius:10px;
+  background:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .18s}
+.mob-tab:hover,.mob-tab.on{color:var(--accent);background:rgba(37,99,235,.1)}
+.mob-tab-ico{font-size:1.25rem;line-height:1}
+.mob-tab-lbl{font-size:.6rem;font-weight:500}
+
+@media(max-width:700px){
+  .pub-header{padding:1rem 1.25rem}
+  .hero{padding:3.5rem 1rem 2.5rem}
+  .hero h1{font-size:clamp(2.4rem,9vw,3.5rem)}
+  #results{grid-template-columns:1fr;padding:0 1rem 7rem}
+  #results.duo{grid-template-columns:1fr}
+  .sidebar{display:none!important}
+  .admin-main{padding:1.25rem 1rem 6rem}
+  .mob-tabbar{display:flex}
+  .form-box,.info-box{padding:1.25rem}
+  .dash-num{font-size:1.9rem}
+}
+@media(min-width:701px){.mob-tabbar{display:none!important}}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+<div class="bg-grid"></div>
+
+<!-- ══ HALAMAN UMUM ══════════════════════════════════════ -->
+<div id="view-public" class="view active">
+  <header class="pub-header" id="mainHeader">
+    <a class="logo" href="#" onclick="resetWelcome();return false">
+      <div class="logo-badge">🤟</div>
+      <div>
+        <div class="logo-name">Kamus Bahasa Isyarat Malaysia</div>
+        <span class="logo-sub">by Cikgu Nidzam</span>
+      </div>
+    </a>
+    <button class="btn-admin" onclick="bukaPin()">⚙ Admin</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-chip">🇲🇾 Bahasa Isyarat Malaysia</div>
+    <h1>Cari.<br>Tonton.<br>Faham.</h1>
+    <p>Taip mana-mana perkataan untuk mencari video isyarat yang berkaitan.</p>
+    <div class="search-wrap">
+      <span class="search-ico">🔍</span>
+      <input type="text" id="searchInput" placeholder="Contoh: selamat pagi, terima kasih…" autocomplete="off" spellcheck="false">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()" title="Kosongkan carian">✕</button>
+    </div>
+    <div class="search-hint">Tekan Enter atau taip untuk mencari</div>
+  </section>
+
+  <div id="statusBar"></div>
+  <div id="results">
+    <div class="welcome-wrap" id="welcomeWrap">
+      <p class="welcome-tagline">Selamat datang ke Kamus Bahasa Isyarat Malaysia.<br>Cari isyarat untuk perkataan yang anda perlukan.</p>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" id="pubTotal"><span class="spin"></span></div>
+          <div class="stat-lbl">Perkataan dalam kamus</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">BIM</div>
+          <div class="stat-lbl">Bahasa Isyarat Malaysia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pub-footer">
+    © 2025 Kamus Bahasa Isyarat Malaysia · Dibina oleh <a href="#" onclick="bukaPin();return false">Cikgu Nidzam</a>
+  </footer>
+</div>
+
+<!-- ══ PIN MODAL ════════════════════════════════════════ -->
+<div class="overlay" id="pinOverlay">
+  <div class="modal">
+    <span class="modal-ico">🔐</span>
+    <h2>Akses Admin</h2>
+    <p>Masukkan PIN 6 digit untuk masuk ke panel pentadbir.</p>
+    <input type="password" id="pinInput" maxlength="6" placeholder="••••••" inputmode="numeric">
+    <div class="pin-err" id="pinErr"></div>
+    <button class="btn-ok" onclick="submitPin()">Masuk →</button><br>
+    <button class="btn-cancel" onclick="tutupPin()">Batal</button>
+  </div>
+</div>
+
+<!-- ══ HALAMAN ADMIN ════════════════════════════════════ -->
+<div id="view-admin" class="view">
+  <!-- Mobile bottom tab bar -->
+  <div class="mob-tabbar">
+    <button class="mob-tab on" id="mobt-dashboard" onclick="tukTab('dashboard',this)">
+      <span class="mob-tab-ico">📊</span>
+      <span class="mob-tab-lbl">Dashboard</span>
+    </button>
+    <button class="mob-tab" id="mobt-tambah" onclick="tukTab('tambah',this)">
+      <span class="mob-tab-ico">➕</span>
+      <span class="mob-tab-lbl">Tambah</span>
+    </button>
+    <button class="mob-tab" id="mobt-senarai" onclick="tukTab('senarai',this);muatSenarai()">
+      <span class="mob-tab-ico">📋</span>
+      <span class="mob-tab-lbl">Senarai</span>
+    </button>
+    <button class="mob-tab" onclick="balikUmum()">
+      <span class="mob-tab-ico">🏠</span>
+      <span class="mob-tab-lbl">Utama</span>
+    </button>
+  </div>
+
+  <div class="admin-layout">
+    <!-- Sidebar Desktop -->
+    <aside class="sidebar">
+      <div class="sb-logo">
+        <div class="logo-badge" style="width:36px;height:36px;font-size:1rem;flex-shrink:0">🤟</div>
+        <div>
+          <div class="sb-logo-name">Kamus Isyarat</div>
+          <span class="sb-logo-sub">⚙ Panel Admin</span>
+        </div>
+      </div>
+      <div class="sb-lbl">Menu</div>
+      <button class="sb-item on" id="sbt-dashboard" onclick="tukTab('dashboard',this)"><span>📊</span> Dashboard</button>
+      <button class="sb-item" id="sbt-tambah" onclick="tukTab('tambah',this)"><span>➕</span> Tambah Entri</button>
+      <button class="sb-item" id="sbt-senarai" onclick="tukTab('senarai',this);muatSenarai()"><span>📋</span> Senarai Kamus</button>
+      <div class="sb-footer">
+        <button class="sb-back" onclick="balikUmum()">← Kembali ke Halaman Umum</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- TAB: DASHBOARD -->
+      <div class="tab-content on" id="tab-dashboard">
+        <div class="pg-head">
+          <h1>Dashboard</h1>
+          <p>Selamat datang ke panel pentadbir Kamus Bahasa Isyarat Malaysia.</p>
+        </div>
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-num" id="admTotal">—</div>
+            <div class="dash-lbl">Jumlah Perkataan</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-num" id="admTerbaru" style="font-size:1.1rem;line-height:1.3">—</div>
+            <div class="dash-lbl">Entri Terbaru</div>
+          </div>
+        </div>
+        <div class="info-box">
+          <h3>📋 Cara Tambah Video Isyarat</h3>
+          <ol>
+            <li>Upload video ke <strong>YouTube</strong> sebagai <strong>Unlisted</strong> (Tidak Tersenarai)</li>
+            <li>Salin <strong>YouTube URL</strong> atau <strong>Video ID</strong> — contoh: <code>dQw4w9WgXcQ</code></li>
+            <li>Pergi ke tab <strong>Tambah Entri</strong> → isi perkataan + tampal URL/ID</li>
+            <li>Klik <strong>Simpan ke Kamus</strong> — selesai! 🎉</li>
+          </ol>
+        </div>
+        <div class="info-box" style="border-color:rgba(6,182,212,.2)">
+          <h3>🔗 Sambungan Google Sheets</h3>
+          <p style="color:var(--muted);font-size:.84rem;line-height:1.7">
+            Web ini disambungkan ke <strong>Google Sheets</strong> melalui Google Apps Script.<br>
+            Semua data disimpan selamat dalam spreadsheet anda.<br>
+            URL Apps Script: <code id="showScriptUrl" style="word-break:break-all">—</code>
+          </p>
+        </div>
+      </div>
+
+      <!-- TAB: TAMBAH ENTRI -->
+      <div class="tab-content" id="tab-tambah">
+        <div class="pg-head">
+          <h1>Tambah Entri</h1>
+          <p>Tambah perkataan baru beserta video YouTube ke dalam kamus.</p>
+        </div>
+        <div class="form-box">
+          <div class="fg">
+            <label>Perkataan *</label>
+            <input type="text" id="inPerkataan" placeholder="Contoh: Terima Kasih" autocomplete="off">
+          </div>
+          <div class="fg">
+            <label>Keterangan (pilihan)</label>
+            <textarea id="inKeterangan" rows="2" placeholder="Huraian ringkas tentang isyarat ini…"></textarea>
+          </div>
+          <div class="fg">
+            <label>YouTube URL atau Video ID *</label>
+            <input type="text" id="inYoutube" placeholder="https://youtu.be/xxxxx atau ID: dQw4w9WgXcQ" oninput="previewYoutube(this.value)" autocomplete="off">
+            <div class="hint">Tampal URL YouTube penuh atau ID video sahaja (11 aksara)</div>
+            <div class="yt-preview-wrap" id="ytPreview">
+              <iframe id="ytPreviewFrame" src="" allowfullscreen allow="autoplay"></iframe>
+            </div>
+          </div>
+          <br>
+          <button class="btn-pri" id="btnTambah" onclick="mulaiTambah()">➕ Simpan ke Kamus</button>
+        </div>
+      </div>
+
+      <!-- TAB: SENARAI -->
+      <div class="tab-content" id="tab-senarai">
+        <div class="pg-head">
+          <h1>Senarai Kamus</h1>
+          <p>Urus semua perkataan dalam kamus.</p>
+        </div>
+        <div class="tbl-box">
+          <div class="tbl-top">
+            <h3>Semua Entri <span class="tbl-count" id="tblCount"></span></h3>
+            <input type="text" id="adminSearch" placeholder="🔍 Cari perkataan…" oninput="filterSenarai(this.value)">
+          </div>
+          <div class="tbl-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Thumbnail</th>
+                  <th>Perkataan</th>
+                  <th>Keterangan</th>
+                  <th>Tarikh</th>
+                  <th>Tindakan</th>
+                </tr>
+              </thead>
+              <tbody id="senaraiBody">
+                <tr><td colspan="5" class="empty-tbl"><span class="spin"></span> Memuatkan…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  KONFIGURASI — TUKAR URL INI KEPADA URL APPS SCRIPT ANDA
+// ══════════════════════════════════════════════════════════
+const SCRIPT_URL = 'https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbw8CB_ZfnkiVbLShCmeHY3cg0HRRjyimjdtswSr4g8u--HzXo1ucs4KAyZMT8YxD5HB/exec';
+// Contoh: 'https://script.google.com/macros/s/AKfycb.../exec'
+// ══════════════════════════════════════════════════════════
+
+// Tunjuk URL dalam dashboard
+document.getElementById('showScriptUrl').textContent = 
+  SCRIPT_URL === 'TUKAR_KE_URL_APPS_SCRIPT_ANDA' ? '⚠️ Belum dikonfigurasi' : SCRIPT_URL;
+
+// ── Scroll header shadow ──────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── EKSTRAK YOUTUBE ID ────────────────────────────────────
+function ekstrakYoutubeId(input) {
+  if (!input) return null;
+  input = input.trim().replace(/[\u200B-\u200D\uFEFF\u00A0]/g, '').replace(/\s+/g,' ');
+  if (/^[a-zA-Z0-9_\-]{11}$/.test(input)) return input;
+  const patterns = [
+    /[?&]v=([a-zA-Z0-9_\-]{11})/,
+    /youtu\.be\/([a-zA-Z0-9_\-]{11})/,
+    /embed\/([a-zA-Z0-9_\-]{11})/,
+    /shorts\/([a-zA-Z0-9_\-]{11})/,
+    /\/v\/([a-zA-Z0-9_\-]{11})/,
+    /watch\?.*v=([a-zA-Z0-9_\-]{11})/,
+  ];
+  for (let p of patterns) { const m = input.match(p); if (m) return m[1]; }
+  const last = input.match(/([a-zA-Z0-9_\-]{11})(?:[&?\s]|$)/);
+  return last ? last[1] : null;
+}
+
+// ── API ── (panggil Apps Script) ──────────────────────────
+async function callAPI(action, params = {}) {
+  if (SCRIPT_URL === 'TUKAR_KE_URL_APPS_SCRIPT_ANDA') {
+    throw new Error('URL Apps Script belum dikonfigurasi dalam fail config.js');
+  }
+  const url = new URL(SCRIPT_URL);
+  url.searchParams.set('action', action);
+  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+
+  const res = await fetch(url.toString(), { redirect: 'follow' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const text = await res.text();
+  try { return JSON.parse(text); }
+  catch { throw new Error('Respons tidak sah dari server'); }
+}
+
+// Fungsi API ringkas
+const API = {
+  async semuaPerkataan()                              { return callAPI('semuaPerkataan'); },
+  async cariPerkataan(q)                              { return callAPI('cariPerkataan', { q }); },
+  async semakPin(pin)                                 { return callAPI('semakPin', { pin }); },
+  async tambahEntri(perkataan, keterangan, youtube)   { return callAPI('tambahEntri', { perkataan, keterangan, youtube }); },
+  async padamEntri(row)                               { return callAPI('padamEntri', { row }); },
+  async kemaskiniEntri(row, perkataan, keterangan, youtube) {
+    return callAPI('kemaskiniEntri', { row, perkataan, keterangan, youtube });
+  }
+};
+
+// ── STATS UTAMA ───────────────────────────────────────────
+let pubStatsLoaded = false;
+async function muatStats() {
+  if (pubStatsLoaded) return;
+  try {
+    const r = await API.semuaPerkataan();
+    if (r && r.ok) {
+      document.getElementById('pubTotal').textContent = r.data.length;
+      pubStatsLoaded = true;
+    }
+  } catch(e) {
+    document.getElementById('pubTotal').textContent = '—';
+  }
+}
+muatStats();
+
+// ── SEARCH ───────────────────────────────────────────────
+let dbt;
+const inp = document.getElementById('searchInput');
+const clrBtn = document.getElementById('searchClear');
+
+inp.addEventListener('input', function() {
+  clrBtn.style.display = this.value ? 'block' : 'none';
+  clearTimeout(dbt);
+  const q = this.value.trim();
+  if (!q) { resetWelcome(); return; }
+  dbt = setTimeout(() => cari(q), 420);
+});
+inp.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { clearTimeout(dbt); const q = this.value.trim(); if(q) cari(q); }
+  if (e.key === 'Escape') clearSearch();
+});
+
+function clearSearch() {
+  inp.value = '';
+  clrBtn.style.display = 'none';
+  resetWelcome();
+  inp.focus();
+}
+
+async function cari(q) {
+  setStatus('<span class="spin"></span> Mencari <strong>"' + q + '"</strong>…');
+  document.getElementById('results').innerHTML = '';
+  try {
+    const r = await API.cariPerkataan(q);
+    paparHasil(r, q);
+  } catch(e) {
+    setStatus('');
+    document.getElementById('results').innerHTML =
+      '<div class="empty"><span class="empty-ico">⚠️</span><h3>Sambungan gagal</h3><p>' + e.message + '</p></div>';
+  }
+}
+
+function paparHasil(r, q) {
+  setStatus('');
+  const div = document.getElementById('results');
+  if (!r || !r.ok) {
+    div.innerHTML = '<div class="empty"><span class="empty-ico">⚠️</span><h3>Ralat</h3><p>' + (r ? r.mesej : 'Tiada respons') + '</p></div>';
+    return;
+  }
+  if (!r.data.length) {
+    div.innerHTML = `<div class="empty">
+      <span class="empty-ico">🤷</span>
+      <h3>Tiada hasil untuk "${q}"</h3>
+      <p>Cuba perkataan lain atau semak ejaan anda.</p>
+    </div>`;
+    return;
+  }
+  div.className = 'results-grid';
+  if (r.data.length === 1) div.id = 'results', div.className = '', div.classList.add('solo');
+  else if (r.data.length === 2) div.id = 'results', div.className = '', div.classList.add('duo');
+  else { div.id = 'results'; div.className = ''; }
+  // Re-assign id after class manipulation
+  div.id = 'results';
+
+  div.innerHTML = r.data.map((item, i) => `
+    <div class="card" style="animation-delay:${i * .08}s">
+      <div class="yt-wrap">
+        ${item.embedUrl
+          ? `<iframe src="${item.embedUrl}?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe>`
+          : `<div class="yt-placeholder"><div class="yt-play">▶</div><span>${item.perkataan}</span></div>`}
+      </div>
+      <div class="card-body">
+        <div class="card-word">${item.perkataan}</div>
+        ${item.keterangan ? `<div class="card-desc">${item.keterangan}</div>` : ''}
+        <div class="card-date">🗓 ${item.tarikh}</div>
+      </div>
+    </div>`).join('');
+}
+
+function resetWelcome() {
+  setStatus('');
+  pubStatsLoaded = false;
+  document.getElementById('results').innerHTML = `
+    <div class="welcome-wrap">
+      <p class="welcome-tagline">Selamat datang ke Kamus Bahasa Isyarat Malaysia.<br>Cari isyarat untuk perkataan yang anda perlukan.</p>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" id="pubTotal"><span class="spin"></span></div>
+          <div class="stat-lbl">Perkataan dalam kamus</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">BIM</div>
+          <div class="stat-lbl">Bahasa Isyarat Malaysia</div>
+        </div>
+      </div>
+    </div>`;
+  muatStats();
+}
+function setStatus(h) { document.getElementById('statusBar').innerHTML = h; }
+
+// ── PIN MODAL ─────────────────────────────────────────────
+function bukaPin() {
+  document.getElementById('pinOverlay').classList.add('open');
+  document.getElementById('pinInput').value = '';
+  document.getElementById('pinErr').textContent = '';
+  setTimeout(() => document.getElementById('pinInput').focus(), 120);
+}
+function tutupPin() { document.getElementById('pinOverlay').classList.remove('open'); }
+async function submitPin() {
+  const pin = document.getElementById('pinInput').value.trim();
+  if (!pin) return;
+  try {
+    const ok = await API.semakPin(pin);
+    if (ok === true || ok === 'true' || ok) {
+      tutupPin(); bukaPanelAdmin();
+    } else {
+      wrongPin();
+    }
+  } catch(e) {
+    wrongPin('Gagal sambung ke server.');
+  }
+}
+function wrongPin(msg) {
+  const inp = document.getElementById('pinInput');
+  inp.classList.add('wrong');
+  document.getElementById('pinErr').textContent = msg || '❌ PIN salah. Cuba lagi.';
+  inp.value = '';
+  setTimeout(() => inp.classList.remove('wrong'), 500);
+}
+document.getElementById('pinInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitPin();
+  if (e.key === 'Escape') tutupPin();
+});
+document.getElementById('pinOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('pinOverlay')) tutupPin();
+});
+
+// ── VIEW SWITCH ───────────────────────────────────────────
+function bukaPanelAdmin() {
+  document.getElementById('view-public').classList.remove('active');
+  document.getElementById('view-admin').classList.add('active');
+  muatDashboard();
+}
+function balikUmum() {
+  document.getElementById('view-admin').classList.remove('active');
+  document.getElementById('view-public').classList.add('active');
+}
+
+// ── ADMIN: TAB ────────────────────────────────────────────
+function tukTab(nama, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.mob-tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('tab-' + nama).classList.add('on');
+  if (btn) btn.classList.add('on');
+  // Sync sidebar
+  const sbBtn = document.getElementById('sbt-' + nama);
+  if (sbBtn) sbBtn.classList.add('on');
+}
+
+// ── ADMIN: DASHBOARD ──────────────────────────────────────
+async function muatDashboard() {
+  try {
+    const r = await API.semuaPerkataan();
+    if (!r || !r.ok) return;
+    document.getElementById('admTotal').textContent = r.data.length;
+    document.getElementById('admTerbaru').textContent =
+      r.data.length > 0 ? r.data[r.data.length - 1].perkataan : '—';
+  } catch(e) { /* silent */ }
+}
+
+// ── ADMIN: YOUTUBE PREVIEW ────────────────────────────────
+function previewYoutube(val) {
+  const id = ekstrakYoutubeId(val);
+  const wrap = document.getElementById('ytPreview');
+  const frame = document.getElementById('ytPreviewFrame');
+  if (id) {
+    frame.src = 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1';
+    wrap.classList.add('show');
+  } else {
+    frame.src = '';
+    wrap.classList.remove('show');
+  }
+}
+
+// ── ADMIN: TAMBAH ENTRI ───────────────────────────────────
+async function mulaiTambah() {
+  const perkataan    = document.getElementById('inPerkataan').value.trim();
+  const keterangan   = document.getElementById('inKeterangan').value.trim();
+  const youtubeInput = document.getElementById('inYoutube').value.trim();
+
+  if (!perkataan)    { showToast('⚠️ Sila masukkan perkataan.', 'err'); return; }
+  if (!youtubeInput) { showToast('⚠️ Sila masukkan YouTube URL atau ID.', 'err'); return; }
+  if (!ekstrakYoutubeId(youtubeInput)) { showToast('❌ YouTube ID tidak sah. Cuba semak URL.', 'err'); return; }
+
+  const btn = document.getElementById('btnTambah');
+  btn.disabled = true; btn.textContent = '⏳ Menyimpan…';
+
+  try {
+    const r = await API.tambahEntri(perkataan, keterangan, youtubeInput);
+    btn.disabled = false; btn.textContent = '➕ Simpan ke Kamus';
+    if (r && r.ok) {
+      showToast('✅ ' + r.mesej, 'ok');
+      document.getElementById('inPerkataan').value = '';
+      document.getElementById('inKeterangan').value = '';
+      document.getElementById('inYoutube').value = '';
+      document.getElementById('ytPreview').classList.remove('show');
+      document.getElementById('ytPreviewFrame').src = '';
+      muatDashboard(); pubStatsLoaded = false;
+    } else {
+      showToast('❌ ' + (r ? r.mesej : 'Ralat tidak diketahui'), 'err');
+    }
+  } catch(e) {
+    btn.disabled = false; btn.textContent = '➕ Simpan ke Kamus';
+    showToast('❌ ' + e.message, 'err');
+  }
+}
+
+// ── ADMIN: SENARAI ────────────────────────────────────────
+let senaraiData = [];
+async function muatSenarai() {
+  document.getElementById('senaraiBody').innerHTML =
+    '<tr><td colspan="5" class="empty-tbl"><span class="spin"></span> Memuatkan…</td></tr>';
+  try {
+    const r = await API.semuaPerkataan();
+    if (!r || !r.ok) {
+      document.getElementById('senaraiBody').innerHTML =
+        '<tr><td colspan="5" class="empty-tbl">⚠️ ' + (r ? r.mesej : 'Gagal muat data') + '</td></tr>';
+      return;
+    }
+    senaraiData = r.data;
+    renderSenarai(senaraiData);
+  } catch(e) {
+    document.getElementById('senaraiBody').innerHTML =
+      '<tr><td colspan="5" class="empty-tbl">❌ ' + e.message + '</td></tr>';
+  }
+}
+
+function renderSenarai(data) {
+  const tbody = document.getElementById('senaraiBody');
+  document.getElementById('tblCount').textContent = data.length ? '(' + data.length + ')' : '';
+  if (!data.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty-tbl">📭 Tiada entri dalam kamus.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(item => `
+    <tr id="tr-${item.row}">
+      <td>
+        ${item.youtubeId
+          ? `<img class="yt-thumb" src="https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg" alt="${item.perkataan}" loading="lazy" onerror="this.style.display='none'">`
+          : `<div class="yt-thumb-ph">▶</div>`}
+      </td>
+      <td><span class="td-word">${item.perkataan}</span></td>
+      <td>${item.keterangan || '<span style="color:var(--muted)">—</span>'}</td>
+      <td><span class="badge">${item.tarikh}</span></td>
+      <td>
+        <button class="btn-edit" onclick="editItem(${item.row})">✏️ Edit</button>
+        <button class="btn-del" onclick="padamItem(${item.row},'${item.perkataan.replace(/'/g,"\\'")}')">🗑 Padam</button>
+      </td>
+    </tr>`).join('');
+}
+
+function filterSenarai(q) {
+  if (!q) { renderSenarai(senaraiData); return; }
+  renderSenarai(senaraiData.filter(i => i.perkataan.toLowerCase().includes(q.toLowerCase())));
+}
+
+async function padamItem(row, perkataan) {
+  if (!confirm('Padam "' + perkataan + '" dari kamus?')) return;
+  try {
+    const r = await API.padamEntri(row);
+    if (!r || r.ok) {
+      showToast('🗑 "' + perkataan + '" dipadam.', 'ok');
+      muatSenarai(); muatDashboard(); pubStatsLoaded = false;
+    } else {
+      showToast('❌ ' + (r.mesej || 'Ralat'), 'err');
+    }
+  } catch(e) { showToast('❌ ' + e.message, 'err'); }
+}
+
+function editItem(row) {
+  const item = senaraiData.find(i => i.row === row);
+  if (!item) return;
+  // Remove existing edit rows
+  document.querySelectorAll('.edit-row').forEach(r => r.remove());
+
+  const tr = document.getElementById('tr-' + row);
+  const editTr = document.createElement('tr');
+  editTr.className = 'edit-row';
+  editTr.innerHTML = `
+    <td colspan="5">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.5rem">
+        <div>
+          <label style="font-size:.68rem;color:var(--muted);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em">Perkataan</label>
+          <input class="edit-inp" id="edit-perkataan-${row}" value="${item.perkataan}">
+        </div>
+        <div>
+          <label style="font-size:.68rem;color:var(--muted);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em">YouTube URL/ID</label>
+          <input class="edit-inp" id="edit-youtube-${row}" value="${item.youtubeId}">
+        </div>
+      </div>
+      <div style="margin-bottom:.5rem">
+        <label style="font-size:.68rem;color:var(--muted);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em">Keterangan</label>
+        <input class="edit-inp" id="edit-keterangan-${row}" value="${item.keterangan}">
+      </div>
+      <div class="edit-actions">
+        <button class="btn-save" onclick="simpanEdit(${row})">✅ Simpan</button>
+        <button class="btn-xcancel" onclick="batalEdit()">Batal</button>
+      </div>
+    </td>`;
+  tr.insertAdjacentElement('afterend', editTr);
+  document.getElementById('edit-perkataan-' + row).focus();
+}
+
+function batalEdit() {
+  document.querySelectorAll('.edit-row').forEach(r => r.remove());
+}
+
+async function simpanEdit(row) {
+  const perkataan  = document.getElementById('edit-perkataan-' + row).value.trim();
+  const keterangan = document.getElementById('edit-keterangan-' + row).value.trim();
+  const youtube    = document.getElementById('edit-youtube-' + row).value.trim();
+  if (!perkataan || !youtube) { showToast('⚠️ Perkataan dan YouTube tidak boleh kosong.', 'err'); return; }
+
+  try {
+    const r = await API.kemaskiniEntri(row, perkataan, keterangan, youtube);
+    if (r && r.ok) {
+      showToast('✅ ' + r.mesej, 'ok');
+      batalEdit(); muatSenarai();
+    } else {
+      showToast('❌ ' + (r ? r.mesej : 'Ralat'), 'err');
+    }
+  } catch(e) { showToast('❌ ' + e.message, 'err'); }
+}
+
+// ── TOAST ─────────────────────────────────────────────────
+let tTmr;
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.className = 'toast ' + type + ' up';
+  t.textContent = msg;
+  clearTimeout(tTmr);
+  tTmr = setTimeout(() => t.classList.remove('up'), 4500);
+}
+</script>
+</body>
+</html>
