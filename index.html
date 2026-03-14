@@ -1,736 +1,131 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kamus Bahasa Isyarat Malaysia by Cikgu Nidzam</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg:      #06090f;
-  --surface: #0c1220;
-  --card:    #101826;
-  --border:  #1a2840;
-  --accent:  #2563eb;
-  --accent2: #06b6d4;
-  --ag:      linear-gradient(135deg,#2563eb,#06b6d4);
-  --glow:    rgba(37,99,235,0.18);
-  --text:    #dde4f0;
-  --muted:   #4d6180;
-  --muted2:  #2a3d58;
-  --danger:  #ef4444;
-  --success: #10b981;
-  --warn:    #f59e0b;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
-.bg-mesh{position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse 90% 60% at 15% 0%,rgba(37,99,235,.07) 0%,transparent 55%),
-    radial-gradient(ellipse 60% 50% at 85% 100%,rgba(6,182,212,.06) 0%,transparent 50%)}
-.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:linear-gradient(rgba(37,99,235,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.04) 1px,transparent 1px);
-  background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="[TAJUK]" />
+  <meta name="theme-color" content="#000000" />
+  <title>[TAJUK]</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* VIEWS */
-.view{display:none;position:relative;z-index:1;min-height:100vh}
-.view.active{display:block}
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background: #000;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+    }
 
-/* ══ HALAMAN UMUM ══════════════════════════ */
-.pub-header{display:flex;align-items:center;justify-content:space-between;
-  padding:1.5rem 2rem;border-bottom:1px solid var(--border);
-  background:rgba(6,9,15,.8);backdrop-filter:blur(14px);
-  position:sticky;top:0;z-index:50}
-.logo{display:flex;align-items:center;gap:.75rem}
-.logo-badge{width:40px;height:40px;border-radius:12px;background:var(--ag);
-  display:flex;align-items:center;justify-content:center;font-size:1.15rem;
-  box-shadow:0 0 24px rgba(37,99,235,.45)}
-.logo-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-.02em;line-height:1.1}
-.logo-sub{display:block;font-size:.6rem;font-weight:400;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-family:'DM Sans',sans-serif}
-.btn-admin{font-size:.75rem;color:var(--muted);padding:.4rem 1.1rem;border:1px solid var(--border);
-  border-radius:999px;background:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
-.btn-admin:hover{color:var(--accent2);border-color:var(--accent2)}
+    #app-frame {
+      position: fixed;
+      inset: 0;
+      inset: env(safe-area-inset-top, 0)
+             env(safe-area-inset-right, 0)
+             env(safe-area-inset-bottom, 0)
+             env(safe-area-inset-left, 0);
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      border: none;
+      outline: none;
+      display: block;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
 
-.hero{text-align:center;padding:5rem 1.5rem 3.5rem}
-.hero-chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent2);background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.18);
-  padding:.35rem 1rem;border-radius:999px;margin-bottom:1.75rem}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,8vw,5.5rem);font-weight:800;
-  letter-spacing:-.05em;line-height:.92;margin-bottom:1.25rem;
-  background:linear-gradient(160deg,#fff 30%,#7dd3fc 70%,var(--accent2) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{color:var(--muted);font-size:1rem;max-width:400px;margin:0 auto 2.5rem;line-height:1.65}
+    /* Loading screen */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      gap: 20px;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
 
-.search-wrap{position:relative;max-width:560px;margin:0 auto}
-.search-ico{position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
-#searchInput{width:100%;padding:1.1rem 1.25rem 1.1rem 3rem;background:var(--surface);
-  border:1.5px solid var(--border);border-radius:16px;color:var(--text);font-size:1rem;
-  font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s}
-#searchInput::placeholder{color:var(--muted)}
-#searchInput:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
-.search-hint{margin-top:.7rem;font-size:.75rem;color:var(--muted2)}
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-#statusBar{text-align:center;min-height:2.5rem;padding:.5rem;font-size:.85rem;color:var(--muted);position:relative;z-index:1}
+    .loader-title {
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      opacity: 0.6;
+    }
 
-#results{max-width:1100px;margin:0 auto;padding:0 1.5rem 5rem;
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.5rem}
-#results.solo{grid-template-columns:minmax(310px,580px);justify-content:center}
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 2.5px solid rgba(255,255,255,0.15);
+      border-top-color: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;
-  transition:transform .25s,box-shadow .25s,border-color .25s;animation:fadeUp .4s ease both}
-.card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,.5),0 0 0 1px var(--accent);border-color:var(--accent)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-
-/* YouTube embed — nisbah 16:9 */
-.yt-wrap{position:relative;padding-top:56.25%;background:#000;border-radius:0}
-.yt-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.yt-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,#0f172a,#1e3a5f);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
-  color:var(--muted);font-size:.8rem;cursor:pointer}
-.yt-play{width:56px;height:56px;border-radius:50%;background:rgba(255,0,0,.8);
-  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
-  transition:transform .2s,background .2s}
-.yt-placeholder:hover .yt-play{transform:scale(1.1);background:rgba(255,0,0,1)}
-
-.card-body{padding:1.25rem}
-.card-word{font-family:'Syne',sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:-.02em;margin-bottom:.3rem;
-  background:linear-gradient(90deg,#fff,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.card-desc{font-size:.83rem;color:var(--muted);line-height:1.5}
-.card-date{margin-top:.75rem;font-size:.7rem;color:var(--muted2);display:flex;align-items:center;gap:.3rem}
-
-.welcome-wrap{grid-column:1/-1;text-align:center;padding:1rem 0 2rem}
-.stats-row{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:.5rem}
-.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.25rem 2.5rem;text-align:center}
-.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;
-  background:var(--ag);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat-lbl{font-size:.75rem;color:var(--muted);margin-top:.2rem}
-
-.empty{grid-column:1/-1;text-align:center;padding:5rem 1rem;animation:fadeUp .4s ease}
-.empty-ico{font-size:3.5rem;margin-bottom:1rem}
-.empty h3{font-family:'Syne',sans-serif;font-size:1.15rem;margin-bottom:.5rem}
-.empty p{color:var(--muted);font-size:.88rem}
-
-.spin{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);
-  border-radius:50%;animation:rot .7s linear infinite;vertical-align:middle;margin-right:.4rem}
-@keyframes rot{to{transform:rotate(360deg)}}
-
-/* PIN MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);
-  z-index:200;align-items:center;justify-content:center}
-.overlay.open{display:flex}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.5rem;
-  width:90%;max-width:380px;text-align:center;animation:popIn .3s cubic-bezier(.34,1.56,.64,1)}
-@keyframes popIn{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
-.modal-ico{font-size:2.8rem;margin-bottom:1rem}
-.modal h2{font-family:'Syne',sans-serif;font-size:1.25rem;margin-bottom:.35rem}
-.modal p{font-size:.83rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.5}
-#pinInput{width:100%;padding:.85rem;background:var(--surface);border:1.5px solid var(--border);
-  border-radius:12px;color:var(--text);font-size:1.8rem;text-align:center;letter-spacing:.4em;
-  font-family:'Syne',sans-serif;outline:none;margin-bottom:.75rem;transition:border-color .2s,box-shadow .2s}
-#pinInput:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
-#pinInput.wrong{animation:shake .4s ease;border-color:var(--danger)}
-@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
-.pin-err{font-size:.78rem;color:var(--danger);min-height:1.2em;margin-bottom:.75rem}
-.btn-ok{width:100%;padding:.9rem;background:var(--ag);border:none;border-radius:12px;color:#fff;
-  font-size:.95rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s}
-.btn-ok:hover{opacity:.9}
-.btn-cancel{margin-top:.75rem;background:none;border:none;color:var(--muted);font-size:.82rem;
-  cursor:pointer;font-family:'DM Sans',sans-serif;transition:color .2s}
-.btn-cancel:hover{color:var(--text)}
-.pub-footer{position:relative;z-index:1;text-align:center;padding:1.75rem;color:var(--muted2);
-  font-size:.73rem;border-top:1px solid var(--border)}
-
-/* ══ HALAMAN ADMIN ══════════════════════════ */
-.admin-layout{display:flex;min-height:100vh}
-.sidebar{width:230px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;padding:1.25rem .75rem}
-.sb-logo{display:flex;align-items:center;gap:.6rem;padding:.5rem .6rem 1.5rem;
-  border-bottom:1px solid var(--border);margin-bottom:1.25rem}
-.sb-logo-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:-.02em;line-height:1.15}
-.sb-logo-sub{display:block;font-size:.58rem;font-weight:400;color:var(--warn);letter-spacing:.1em;text-transform:uppercase}
-.sb-lbl{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.25rem .6rem;margin-bottom:.35rem}
-.sb-item{display:flex;align-items:center;gap:.6rem;padding:.6rem .75rem;border-radius:10px;
-  font-size:.85rem;color:var(--muted);background:none;border:none;width:100%;text-align:left;
-  font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .18s;margin-bottom:.1rem}
-.sb-item:hover{background:var(--card);color:var(--text)}
-.sb-item.on{background:rgba(37,99,235,.15);color:var(--accent)}
-.sb-footer{margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
-.sb-back{display:flex;align-items:center;gap:.5rem;width:100%;background:none;border:none;
-  color:var(--muted);font-size:.8rem;padding:.5rem .75rem;border-radius:8px;cursor:pointer;
-  font-family:'DM Sans',sans-serif;transition:all .18s}
-.sb-back:hover{background:var(--card);color:var(--text)}
-
-.admin-main{flex:1;padding:2rem;overflow-y:auto;min-width:0}
-.tab-content{display:none}.tab-content.on{display:block}
-.pg-head{margin-bottom:2rem}
-.pg-head h1{font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.3rem}
-.pg-head p{color:var(--muted);font-size:.85rem}
-
-.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;margin-bottom:2rem}
-.dash-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem}
-.dash-num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;
-  background:var(--ag);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.dash-lbl{font-size:.75rem;color:var(--muted);margin-top:.2rem}
-
-.info-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;max-width:680px;margin-bottom:1.5rem}
-.info-box h3{font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:.75rem}
-.info-box p{font-size:.84rem;color:var(--muted);line-height:1.6}
-.info-box code{background:var(--surface);padding:.1rem .4rem;border-radius:5px;font-size:.8rem;color:var(--accent2)}
-
-/* Form tambah entri */
-.form-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;max-width:680px}
-.fg{margin-bottom:1.25rem}
-.fg label{display:block;font-size:.75rem;font-weight:500;color:var(--muted);margin-bottom:.5rem;
-  text-transform:uppercase;letter-spacing:.07em}
-.fg input[type=text],.fg textarea{width:100%;padding:.85rem 1rem;background:var(--surface);
-  border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-size:.93rem;
-  font-family:'DM Sans',sans-serif;outline:none;resize:vertical;transition:border-color .2s,box-shadow .2s}
-.fg input:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
-.fg .hint{font-size:.75rem;color:var(--muted2);margin-top:.4rem}
-
-/* YouTube preview dalam form */
-.yt-preview-wrap{display:none;margin-top:.75rem;border-radius:12px;overflow:hidden;
-  border:1px solid var(--border);background:#000}
-.yt-preview-wrap.show{display:block}
-.yt-preview-wrap iframe{width:100%;height:200px;border:none;display:block}
-
-.btn-pri{padding:.9rem 2rem;background:var(--ag);border:none;border-radius:12px;color:#fff;
-  font-size:.93rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s,transform .1s}
-.btn-pri:hover{opacity:.9}.btn-pri:active{transform:scale(.98)}.btn-pri:disabled{opacity:.45;cursor:not-allowed}
-.btn-del{padding:.4rem .85rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);
-  border-radius:8px;color:var(--danger);font-size:.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
-.btn-del:hover{background:rgba(239,68,68,.2)}
-
-/* Table senarai */
-.tbl-box{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
-.tbl-top{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.tbl-top h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
-#adminSearch{padding:.5rem 1rem;background:var(--surface);border:1px solid var(--border);
-  border-radius:999px;color:var(--text);font-size:.82rem;font-family:'DM Sans',sans-serif;
-  outline:none;width:210px;transition:border-color .2s}
-#adminSearch:focus{border-color:var(--accent)}
-table{width:100%;border-collapse:collapse;font-size:.85rem}
-thead th{padding:.7rem 1.1rem;text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--muted);background:var(--surface);border-bottom:1px solid var(--border)}
-tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
-tbody tr:hover{background:rgba(255,255,255,.02)}
-tbody tr:last-child{border-bottom:none}
-td{padding:.85rem 1.1rem;vertical-align:middle}
-.td-word{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem}
-.yt-thumb{width:90px;height:56px;border-radius:6px;object-fit:cover;display:block}
-.yt-thumb-placeholder{width:90px;height:56px;border-radius:6px;background:linear-gradient(135deg,#0f172a,#1e3a5f);
-  display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--muted)}
-.badge{display:inline-block;padding:.18rem .55rem;border-radius:999px;font-size:.68rem;
-  background:rgba(37,99,235,.12);color:var(--accent);border:1px solid rgba(37,99,235,.18)}
-.empty-tbl{text-align:center;padding:3rem;color:var(--muted);font-size:.85rem}
-
-.toast{position:fixed;bottom:2rem;right:2rem;padding:.85rem 1.3rem;border-radius:12px;
-  font-size:.85rem;font-weight:500;z-index:999;display:flex;align-items:center;gap:.6rem;max-width:340px;
-  transform:translateY(100px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1)}
-.toast.up{transform:translateY(0);opacity:1}
-.toast.ok{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.28);color:var(--success)}
-.toast.err{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.28);color:var(--danger)}
-
-.demo-banner{position:fixed;top:0;left:0;right:0;z-index:999;
-  background:rgba(245,158,11,.12);border-bottom:1px solid rgba(245,158,11,.25);
-  color:var(--warn);font-size:.75rem;text-align:center;padding:.45rem}
-
-@media(max-width:700px){
-  .pub-header{padding:1rem}
-  .hero{padding:3rem 1rem 2rem}
-  #results{grid-template-columns:1fr}
-  .sidebar{display:none !important}
-  .admin-main{padding:1rem 1rem 5rem}
-  .mob-tabbar{display:flex !important}
-}
-@media(min-width:701px){
-  .mob-tabbar{display:none !important}
-}
-/* Mobile top bar */
-.mob-bar{display:none}
-.mob-overlay{display:none;position:fixed;inset:0;z-index:299;background:rgba(0,0,0,.6)}
-
-/* Bottom tab bar — hanya pada mobile */
-.mob-tabbar{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;z-index:200;
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  padding:.5rem .5rem calc(.5rem + env(safe-area-inset-bottom));
-  gap:.25rem;
-  backdrop-filter:blur(20px);
-}
-.mob-tab{
-  flex:1;display:flex;flex-direction:column;align-items:center;
-  gap:.2rem;padding:.5rem .25rem;border-radius:10px;
-  background:none;border:none;cursor:pointer;
-  font-family:'DM Sans',sans-serif;color:var(--muted);
-  font-size:.65rem;transition:all .18s;
-}
-.mob-tab:hover,.mob-tab.on{color:var(--accent);background:rgba(37,99,235,.1)}
-.mob-tab-ico{font-size:1.3rem;line-height:1}
-.mob-tab-lbl{font-size:.62rem;font-weight:500}
-/* Desktop — sembunyikan mob-bar */
-@media(min-width:701px){
-  .mob-bar{display:none !important}
-}
-</style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-<div class="bg-mesh"></div>
-<div class="bg-grid"></div>
-<div class="demo-banner" id="demoBanner">⚠️ Mod Demo — PIN: <strong>123456</strong> &nbsp;|&nbsp; Tambah entri demo dengan YouTube ID contoh</div>
 
-<!-- ══ HALAMAN UMUM ══════════════════════════════════════ -->
-<div id="view-public" class="view active" style="padding-top:2rem">
-  <header class="pub-header">
-    <div class="logo">
-      <div class="logo-badge">🤟</div>
-      <div class="logo-name">Kamus Bahasa Isyarat Malaysia<span class="logo-sub">by Cikgu Nidzam</span></div>
-    </div>
-    <button class="btn-admin" onclick="bukaPin()">⚙ Admin</button>
-  </header>
-
-  <section class="hero">
-    <div class="hero-chip">🇲🇾 Bahasa Isyarat Malaysia</div>
-    <h1>Cari.<br>Tonton.<br>Faham.</h1>
-    <p>Taip mana-mana perkataan untuk mencari video isyarat yang berkaitan.</p>
-    <div class="search-wrap">
-      <span class="search-ico">🔍</span>
-      <input type="text" id="searchInput" placeholder="Contoh: selamat pagi, terima kasih…" autocomplete="off" spellcheck="false">
-    </div>
-    <div class="search-hint">Tekan Enter atau tunggu sebentar</div>
-  </section>
-
-  <div id="statusBar"></div>
-  <div id="results">
-    <div class="welcome-wrap">
-      <div class="stats-row">
-        <div class="stat-box"><div class="stat-num" id="pubTotal">—</div><div class="stat-lbl">Perkataan dalam kamus</div></div>
-        <div class="stat-box"><div class="stat-num">BIM</div><div class="stat-lbl">Bahasa Isyarat Malaysia</div></div>
-      </div>
-    </div>
+  <!-- Loading overlay -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <span class="loader-title">[TAJUK]</span>
   </div>
-  <footer class="pub-footer">© 2025 Kamus Bahasa Isyarat Malaysia by Cikgu Nidzam</footer>
-</div>
 
-<!-- ══ PIN MODAL ════════════════════════════════════════ -->
-<div class="overlay" id="pinOverlay">
-  <div class="modal">
-    <div class="modal-ico">🔐</div>
-    <h2>Akses Admin</h2>
-    <p>Masukkan PIN 6 digit untuk masuk ke panel pentadbir.</p>
-    <input type="password" id="pinInput" maxlength="6" placeholder="••••••" inputmode="numeric">
-    <div class="pin-err" id="pinErr"></div>
-    <button class="btn-ok" onclick="submitPin()">Masuk →</button><br>
-    <button class="btn-cancel" onclick="tutupPin()">Batal</button>
-  </div>
-</div>
+  <!-- GAS iframe -->
+  <iframe
+    id="app-frame"
+    src="[URL_EXEC_GAS]"
+    title="[TAJUK]"
+    allow="camera; microphone; geolocation; clipboard-read; clipboard-write"
+    allowfullscreen
+    loading="eager"
+    scrolling="yes"
+  ></iframe>
 
-<!-- ══ HALAMAN ADMIN ════════════════════════════════════ -->
-<div id="view-admin" class="view" style="padding-top:2rem">
-  <!-- Bottom tab bar untuk mobile -->
-  <div class="mob-tabbar" id="mobTabbar">
-    <button class="mob-tab on" id="mobt-dashboard" onclick="tukTab('dashboard',this);tukMobTab('dashboard')">
-      <span class="mob-tab-ico">📊</span>
-      <span class="mob-tab-lbl">Dashboard</span>
-    </button>
-    <button class="mob-tab" id="mobt-tambah" onclick="tukTab('tambah',this);tukMobTab('tambah')">
-      <span class="mob-tab-ico">➕</span>
-      <span class="mob-tab-lbl">Tambah</span>
-    </button>
-    <button class="mob-tab" id="mobt-senarai" onclick="tukTab('senarai',this);muatSenarai();tukMobTab('senarai')">
-      <span class="mob-tab-ico">📋</span>
-      <span class="mob-tab-lbl">Senarai</span>
-    </button>
-    <button class="mob-tab" onclick="balikUmum()">
-      <span class="mob-tab-ico">🏠</span>
-      <span class="mob-tab-lbl">Utama</span>
-    </button>
-  </div>
-  <div class="admin-layout">
-    <aside class="sidebar">
-      <div class="sb-logo">
-        <div class="logo-badge" style="width:34px;height:34px;font-size:1rem">🤟</div>
-        <div class="sb-logo-name">Kamus Bahasa Isyarat Malaysia<span class="sb-logo-sub">⚙ Panel Admin</span></div>
-      </div>
-      <div class="sb-lbl">Menu</div>
-      <button class="sb-item on" onclick="tukTab('dashboard',this)"><span>📊</span> Dashboard</button>
-      <button class="sb-item" onclick="tukTab('tambah',this)"><span>➕</span> Tambah Entri</button>
-      <button class="sb-item" onclick="tukTab('senarai',this);muatSenarai()"><span>📋</span> Senarai Kamus</button>
-      <div class="sb-footer">
-        <button class="sb-back" onclick="balikUmum()">← Kembali ke Halaman Umum</button>
-      </div>
-    </aside>
+  <script>
+    const frame = document.getElementById('app-frame');
+    const loader = document.getElementById('loader');
 
-    <main class="admin-main">
-
-      <!-- DASHBOARD -->
-      <div class="tab-content on" id="tab-dashboard">
-        <div class="pg-head"><h1>Dashboard</h1><p>Selamat datang ke panel pentadbir.</p></div>
-        <div class="dash-grid">
-          <div class="dash-card"><div class="dash-num" id="admTotal">—</div><div class="dash-lbl">Jumlah Perkataan</div></div>
-          <div class="dash-card"><div class="dash-num" id="admTerbaru" style="font-size:1.1rem;line-height:1.3">—</div><div class="dash-lbl">Tambah Terbaru</div></div>
-        </div>
-        <div class="info-box">
-          <h3>📋 Cara Guna</h3>
-          <p>
-            1. Upload video isyarat ke <strong>YouTube sebagai Unlisted</strong> (Tidak Tersenarai)<br>
-            2. Salin <strong>YouTube URL</strong> atau <strong>Video ID</strong> (contoh: <code>dQw4w9WgXcQ</code>)<br>
-            3. Pergi ke tab <strong>Tambah Entri</strong> → isi perkataan + tampal YouTube URL/ID<br>
-            4. Klik <strong>Simpan</strong> — video terus boleh ditonton oleh semua orang
-          </p>
-        </div>
-      </div>
-
-      <!-- TAMBAH ENTRI -->
-      <div class="tab-content" id="tab-tambah">
-        <div class="pg-head"><h1>Tambah Entri</h1><p>Tambah perkataan baru dengan video YouTube ke dalam kamus.</p></div>
-        <div class="form-box">
-          <div class="fg">
-            <label>Perkataan *</label>
-            <input type="text" id="inPerkataan" placeholder="Contoh: Terima kasih" autocomplete="off">
-          </div>
-          <div class="fg">
-            <label>Keterangan (pilihan)</label>
-            <textarea id="inKeterangan" rows="2" placeholder="Huraian ringkas tentang isyarat ini…"></textarea>
-          </div>
-          <div class="fg">
-            <label>YouTube URL atau Video ID *</label>
-            <input type="text" id="inYoutube" placeholder="https://youtu.be/xxxxx atau ID: dQw4w9WgXcQ" oninput="previewYoutube(this.value)" autocomplete="off">
-            <div class="hint">Tampal URL YouTube atau ID video sahaja (11 aksara)</div>
-            <div class="yt-preview-wrap" id="ytPreview">
-              <iframe id="ytPreviewFrame" src="" allowfullscreen allow="autoplay"></iframe>
-            </div>
-          </div>
-          <br>
-          <button class="btn-pri" id="btnTambah" onclick="mulaiTambah()">➕ Simpan ke Kamus</button>
-        </div>
-      </div>
-
-      <!-- SENARAI -->
-      <div class="tab-content" id="tab-senarai">
-        <div class="pg-head"><h1>Senarai Kamus</h1><p>Urus semua perkataan dalam kamus.</p></div>
-        <div class="tbl-box">
-          <div class="tbl-top">
-            <h3>Semua Entri</h3>
-            <input type="text" id="adminSearch" placeholder="🔍 Cari perkataan…" oninput="filterSenarai(this.value)">
-          </div>
-          <table>
-            <thead><tr><th>Thumbnail</th><th>Perkataan</th><th>Keterangan</th><th>Tarikh</th><th>Tindakan</th></tr></thead>
-            <tbody id="senaraiBody"><tr><td colspan="5" class="empty-tbl"><span class="spin"></span> Memuatkan…</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-
-    </main>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-/* ── APPS SCRIPT URL ── */
-const AS_URL = 'https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbw8CB_ZfnkiVbLShCmeHY3cg0HRRjyimjdtswSr4g8u--HzXo1ucs4KAyZMT8YxD5HB/exec';
-
-/* ── HELPER ── */
-function parseR(val, fallback) {
-  if (val === null || val === undefined) return fallback;
-  if (typeof val === 'string') { try { return JSON.parse(val); } catch(e) { return fallback; } }
-  return val;
-}
-
-async function asGet(params) {
-  try {
-    const url = AS_URL + '?' + new URLSearchParams(params).toString();
-    const r = await fetch(url, {redirect:'follow'});
-    return await r.json();
-  } catch(e) {
-    return {ok:false, mesej:e.message};
-  }
-}
-
-async function asPost(body) {
-  try {
-    const r = await fetch(AS_URL, {
-      method:'POST',
-      redirect:'follow',
-      headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify(body)
+    // Hide loader once iframe loads
+    frame.addEventListener('load', () => {
+      loader.classList.add('hidden');
     });
-    return await r.json();
-  } catch(e) {
-    return {ok:false, mesej:e.message};
-  }
-}
 
-/* ── API ── */
-const API = {
-  cariPerkataan: (q)        => asGet({action:'cari', q}),
-  semuaPerkataan: ()        => asGet({action:'semua'}),
-  semakPin: (pin)           => asGet({action:'pin', pin}).then(r => !!(r && r.ok)),
-  tambahEntri: (p,k,y)      => asPost({action:'tambah', perkataan:p, keterangan:k, youtubeInput:y}),
-  padamEntri: (row)         => asPost({action:'padam', row}),
-};
+    // Fallback: hide loader after 8s regardless
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 8000);
 
-document.getElementById('demoBanner').style.display='none';
+    // Prevent body scroll bounce on iOS
+    document.body.addEventListener('touchmove', (e) => {
+      if (e.target === document.body || e.target === document.documentElement) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
 
-/* ── EKSTRAK YOUTUBE ID (JavaScript) ── */
-function ekstrakYoutubeIdJS(input) {
-  if (!input) return null;
-  // Buang semua aksara tersembunyi dan ruang
-  input = input.trim().replace(/[\u200B-\u200D\uFEFF\u00A0]/g, '').replace(/\s+/g,' ');
-
-  // ID terus — tepat 11 aksara
-  if (/^[a-zA-Z0-9_\-]{11}$/.test(input)) return input;
-
-  // Cuba cari mana-mana 11 aksara YouTube ID dalam URL
-  var patterns = [
-    /[?&]v=([a-zA-Z0-9_\-]{11})/,
-    /youtu\.be\/([a-zA-Z0-9_\-]{11})/,
-    /embed\/([a-zA-Z0-9_\-]{11})/,
-    /shorts\/([a-zA-Z0-9_\-]{11})/,
-    /\/v\/([a-zA-Z0-9_\-]{11})/,
-    /watch\?.*v=([a-zA-Z0-9_\-]{11})/,
-  ];
-
-  for (var i = 0; i < patterns.length; i++) {
-    var m = input.match(patterns[i]);
-    if (m && m[1]) return m[1];
-  }
-
-  // Last resort — cari mana-mana 11 aksara yang nampak macam YouTube ID
-  var last = input.match(/([a-zA-Z0-9_\-]{11})(?:[&?\s]|$)/);
-  if (last) return last[1];
-
-  return null;
-}
-
-/* ── PREVIEW YOUTUBE DALAM FORM ── */
-function previewYoutube(val) {
-  const id = ekstrakYoutubeIdJS(val);
-  const wrap = document.getElementById('ytPreview');
-  const frame = document.getElementById('ytPreviewFrame');
-  if (id) {
-    frame.src = 'https://www.youtube.com/embed/' + id;
-    wrap.classList.add('show');
-  } else {
-    frame.src = '';
-    wrap.classList.remove('show');
-  }
-}
-
-/* ── UMUM: STATS ── */
-API.semuaPerkataan().then(r => {
-  if (r && r.ok) document.getElementById('pubTotal').textContent = r.data.length;
-});
-
-/* ── UMUM: SEARCH ── */
-let dbt;
-document.getElementById('searchInput').addEventListener('input', function() {
-  clearTimeout(dbt);
-  const q = this.value.trim();
-  if (!q) { resetWelcome(); return; }
-  dbt = setTimeout(()=>cari(q), 420);
-});
-document.getElementById('searchInput').addEventListener('keydown', function(e) {
-  if (e.key==='Enter') { clearTimeout(dbt); const q=this.value.trim(); if(q) cari(q); }
-});
-
-function cari(q) {
-  setStatus('<span class="spin"></span> Mencari <strong>"'+q+'"</strong>…');
-  document.getElementById('results').innerHTML='';
-  API.cariPerkataan(q).then(paparHasil).catch(e=>setStatus('⚠️ '+e.message));
-}
-
-function paparHasil(r) {
-  setStatus('');
-  const div = document.getElementById('results');
-  if (!r || !r.ok) { div.innerHTML='<div class="empty"><div class="empty-ico">⚠️</div><h3>Ralat</h3><p>'+(r?r.mesej:'Tiada respons')+'</p></div>'; return; }
-  if (!r.data.length) {
-    div.innerHTML='<div class="empty"><div class="empty-ico">🤷</div><h3>Tiada hasil ditemui</h3><p>Cuba perkataan lain atau semak ejaan anda.</p></div>';
-    return;
-  }
-  if (r.data.length===1) div.classList.add('solo'); else div.classList.remove('solo');
-  div.innerHTML = r.data.map((item,i) => `
-    <div class="card" style="animation-delay:${i*.07}s">
-      <div class="yt-wrap">
-        ${item.embedUrl
-          ? `<iframe src="${item.embedUrl}?rel=0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>`
-          : `<div class="yt-placeholder"><div class="yt-play">▶</div><span>${item.perkataan}</span></div>`}
-      </div>
-      <div class="card-body">
-        <div class="card-word">${item.perkataan}</div>
-        ${item.keterangan?`<div class="card-desc">${item.keterangan}</div>`:''}
-        <div class="card-date">🗓 ${item.tarikh}</div>
-      </div>
-    </div>`).join('');
-}
-
-function resetWelcome() {
-  setStatus('');
-  document.getElementById('results').innerHTML=`
-    <div class="welcome-wrap"><div class="stats-row">
-      <div class="stat-box"><div class="stat-num" id="pubTotal">—</div><div class="stat-lbl">Perkataan dalam kamus</div></div>
-      <div class="stat-box"><div class="stat-num">BIM</div><div class="stat-lbl">Bahasa Isyarat Malaysia</div></div>
-    </div></div>`;
-  API.semuaPerkataan().then(r=>{if(r&&r.ok) document.getElementById('pubTotal').textContent=r.data.length;});
-}
-function setStatus(h) { document.getElementById('statusBar').innerHTML=h; }
-
-/* ── PIN MODAL ── */
-function bukaPin() {
-  document.getElementById('pinOverlay').classList.add('open');
-  document.getElementById('pinInput').value='';
-  document.getElementById('pinErr').textContent='';
-  setTimeout(()=>document.getElementById('pinInput').focus(),120);
-}
-function tutupPin() { document.getElementById('pinOverlay').classList.remove('open'); }
-function submitPin() {
-  const pin = document.getElementById('pinInput').value.trim();
-  if(!pin) return;
-  API.semakPin(pin).then(ok=>{
-    if(ok) { tutupPin(); bukaPanelAdmin(); }
-    else {
-      const inp=document.getElementById('pinInput');
-      inp.classList.add('wrong');
-      document.getElementById('pinErr').textContent='❌ PIN salah. Cuba lagi.';
-      inp.value='';
-      setTimeout(()=>inp.classList.remove('wrong'),500);
-    }
-  });
-}
-document.getElementById('pinInput').addEventListener('keydown',e=>{
-  if(e.key==='Enter') submitPin();
-  if(e.key==='Escape') tutupPin();
-});
-document.getElementById('pinOverlay').addEventListener('click',e=>{
-  if(e.target===document.getElementById('pinOverlay')) tutupPin();
-});
-
-/* ── VIEW SWITCH ── */
-function bukaPanelAdmin() {
-  document.getElementById('view-public').classList.remove('active');
-  document.getElementById('view-admin').classList.add('active');
-  muatDashboard();
-}
-function balikUmum() {
-  document.getElementById('view-admin').classList.remove('active');
-  document.getElementById('view-public').classList.add('active');
-}
-
-/* ── ADMIN: TAB ── */
-// tukTab ditakrifkan dalam bahagian Mobile Tab Bar di atas
-
-/* ── ADMIN: DASHBOARD ── */
-function muatDashboard() {
-  API.semuaPerkataan().then(r=>{
-    if(!r||!r.ok) return;
-    document.getElementById('admTotal').textContent=r.data.length;
-    document.getElementById('admTerbaru').textContent=r.data.length>0?r.data[r.data.length-1].perkataan:'—';
-  });
-}
-
-/* ── ADMIN: TAMBAH ENTRI ── */
-function mulaiTambah() {
-  const perkataan    = document.getElementById('inPerkataan').value.trim();
-  const keterangan   = document.getElementById('inKeterangan').value.trim();
-  const youtubeInput = document.getElementById('inYoutube').value.trim();
-
-  if (!perkataan)    { showToast('⚠️ Sila masukkan perkataan.','err'); return; }
-  if (!youtubeInput) { showToast('⚠️ Sila masukkan YouTube URL atau ID.','err'); return; }
-
-  const id = ekstrakYoutubeIdJS(youtubeInput);
-  if (!id) { showToast('❌ YouTube ID tidak sah. Cuba semak URL anda.','err'); return; }
-
-  const btn = document.getElementById('btnTambah');
-  btn.disabled=true;
-  btn.textContent='Menyimpan…';
-
-  API.tambahEntri(perkataan, keterangan, youtubeInput).then(r=>{
-    btn.disabled=false;
-    btn.textContent='➕ Simpan ke Kamus';
-    if(r&&r.ok){
-      showToast('✅ '+r.mesej,'ok');
-      document.getElementById('inPerkataan').value='';
-      document.getElementById('inKeterangan').value='';
-      document.getElementById('inYoutube').value='';
-      document.getElementById('ytPreview').classList.remove('show');
-      document.getElementById('ytPreviewFrame').src='';
-      muatSenarai();
-      muatDashboard();
-    } else {
-      showToast('❌ '+(r?r.mesej:'Ralat tidak diketahui'),'err');
-    }
-  });
-}
-
-/* ── ADMIN: SENARAI ── */
-let senaraiData=[];
-function muatSenarai() {
-  document.getElementById('senaraiBody').innerHTML='<tr><td colspan="5" class="empty-tbl"><span class="spin"></span> Memuatkan…</td></tr>';
-  API.semuaPerkataan().then(r=>{
-    if(!r||!r.ok){
-      document.getElementById('senaraiBody').innerHTML='<tr><td colspan="5" class="empty-tbl">⚠️ '+(r?r.mesej:'Tiada respons dari server')+'</td></tr>';
-      return;
-    }
-    senaraiData=r.data;
-    renderSenarai(senaraiData);
-  });
-}
-
-function renderSenarai(data) {
-  const tbody=document.getElementById('senaraiBody');
-  if(!data.length){tbody.innerHTML='<tr><td colspan="5" class="empty-tbl">📭 Tiada entri dalam kamus.</td></tr>';return;}
-  tbody.innerHTML=data.map(item=>`
-    <tr>
-      <td>
-        ${item.youtubeId
-          ? `<img class="yt-thumb" src="https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg" alt="${item.perkataan}" loading="lazy">`
-          : `<div class="yt-thumb-placeholder">▶</div>`}
-      </td>
-      <td><span class="td-word">${item.perkataan}</span></td>
-      <td>${item.keterangan||'<span style="color:var(--muted)">—</span>'}</td>
-      <td><span class="badge">${item.tarikh}</span></td>
-      <td><button class="btn-del" onclick="padamItem(${item.row},'${item.perkataan}')">🗑 Padam</button></td>
-    </tr>`).join('');
-}
-
-function filterSenarai(q) {
-  if(!q){renderSenarai(senaraiData);return;}
-  renderSenarai(senaraiData.filter(i=>i.perkataan.toLowerCase().includes(q.toLowerCase())));
-}
-
-function padamItem(row,perkataan) {
-  if(!confirm('Padam "'+perkataan+'" dari kamus?')) return;
-  API.padamEntri(row).then(r=>{
-    if(!r||r.ok){showToast('🗑 "'+perkataan+'" dipadam.','ok');muatSenarai();muatDashboard();}
-    else showToast('❌ '+(r.mesej||'Ralat'),'err');
-  });
-}
-
-/* ── MOBILE TAB BAR ── */
-function tukMobTab(nama) {
-  document.querySelectorAll('.mob-tab').forEach(b=>b.classList.remove('on'));
-  const mobBtn = document.getElementById('mobt-'+nama);
-  if (mobBtn) mobBtn.classList.add('on');
-}
-// tukTab — sync sidebar (desktop) dan bottom tab (mobile)
-function tukTab(nama,btn) {
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('on'));
-  document.getElementById('tab-'+nama).classList.add('on');
-  if (btn) btn.classList.add('on');
-}
-
-/* ── TOAST ── */
-let tTmr;
-function showToast(msg,type){
-  const t=document.getElementById('toast');
-  t.className='toast '+type+' up';t.textContent=msg;
-  clearTimeout(tTmr);tTmr=setTimeout(()=>t.classList.remove('up'),4000);
-}
-</script>
 </body>
 </html>
