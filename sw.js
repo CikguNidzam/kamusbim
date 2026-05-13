@@ -4,7 +4,7 @@ const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './kamus_bahasa_isyarat_malaysia.png'
+  './icon.png'
 ];
 
 self.addEventListener('install', e => {
