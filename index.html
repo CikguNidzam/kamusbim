@@ -831,9 +831,9 @@ function paparHasil(r, q) {
   div.innerHTML = r.data.map((item, i) => `
     <div class="card" style="animation-delay:${i * .08}s">
       <div class="yt-wrap">
-        ${item.embedUrl
-          ? `<iframe src="${item.embedUrl}?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe>`
-          : `<div class="yt-placeholder"><div class="yt-play">▶</div><span>${item.perkataan}</span></div>`}
+       ${item.embedUrl
+  ? `<iframe src="${item.embedUrl}?rel=0&modestbranding=1&loop=1&playlist=${item.youtubeId}" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe>`
+  : `<div class="yt-placeholder"><div class="yt-play">▶</div><span>${item.perkataan}</span></div>`}
       </div>
       <div class="card-body">
         <div class="card-word">${item.perkataan}</div>
@@ -935,7 +935,7 @@ function previewYoutube(val) {
   const wrap = document.getElementById('ytPreview');
   const frame = document.getElementById('ytPreviewFrame');
   if (id) {
-    frame.src = 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1';
+    frame.src = 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1&loop=1&playlist=' + id;
     wrap.classList.add('show');
   } else {
     frame.src = '';
